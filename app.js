@@ -19,108 +19,93 @@ const media = {
   mugs: [ ['human-mug-monitor','Mug near the monitor','A human-view image specifies the target placement.'], ['human-mug-rack','Mug near the file rack','Keep the policy fixed and change the visual target.'] ]
  }
 };
-const video = (name,label,edited=false) => `<video controls muted playsinline preload="none" poster="assets/posters/${edited?'edited/':'presentation/'}${name}.webp?v=7" aria-label="${label}"><source src="assets/videos/${edited?'edited/':'presentation/'}${name}.mp4?v=7" type="video/mp4">Your browser does not support video.</video>`;
+const video = (name,label,edited=false) => `<video controls muted playsinline preload="none" poster="assets/posters/${edited?'clean-goals/':'presentation/'}${name}.webp?v=7" aria-label="${label}"><source src="assets/videos/${edited?'clean-goals/':'presentation/'}${name}.mp4?v=7" type="video/mp4">Your browser does not support video.</video>`;
 const multiView = new Set(['zero-bottles','zero-mug','zero-glue','zero-sort','zero-stack','goal-position-a','goal-position-b','human-books-right','human-books-left','human-mug-monitor','human-mug-rack']);
 function cameraControls(name,edited=false){return multiView.has(name)?`<div class="camera-options"><span>Camera</span><div class="segmented" role="group" aria-label="Camera view for ${name}"><button class="active" aria-pressed="true" data-camera="third" data-camera-name="${name}" data-camera-edited="${edited}">Third-person</button><button aria-pressed="false" data-camera="ego" data-camera-name="${name}" data-camera-edited="${edited}">Robot view</button></div></div>`:'';}
 function setPressed(attribute,value){document.querySelectorAll(`[data-${attribute}]`).forEach(b=>{const selected=b.dataset[attribute]===value;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});}
 function replaceGallery(id,html){const container=document.getElementById(id);container.querySelectorAll('video').forEach(v=>v.pause());container.innerHTML=html;}
-const zeroCategories={coordination:'Bimanual coordination',precision:'Precise manipulation',placement:'Sorting & placement'};
-// Interleave categories so the opening row shows the breadth of available tasks.
-const zeroTasks=Array.from({length:Math.max(...Object.values(media.zero).map(items=>items.length))},(_,i)=>
- Object.entries(media.zero).flatMap(([category,items])=>items[i]?[{category,item:items[i]}]:[])).flat();
-let visibleZeroTasks=zeroTasks,zeroTaskIndex=0,zeroTaskTrigger=null,activeZeroPreview=null;
+const zeroCategories={coordination:'Bimanual coordination',precision:'Precise manipulation',placement:'Sorting & placement',articulation:'Drawers & articulated objects'};
+const legacyZeroTasks=Object.entries(media.zero).flatMap(([category,items])=>items.map(([id,title,description])=>({id,title,description,category,src:`assets/videos/presentation/${id}.mp4`,poster:`assets/posters/presentation/${id}.webp`,legacy_id:id,camera_view:'Third-person',playback_note:'Playback speed is stated in the recording.'})));
+let zeroTasks=legacyZeroTasks,visibleZeroTasks=zeroTasks,zeroTaskIndex=0,zeroTaskTrigger=null;
 const zeroTaskDialog=document.getElementById('zero-task-dialog');
 const zeroPlayer=document.getElementById('zero-task-player');
+const introDialog=document.getElementById('intro-dialog');
 const zeroPreviewMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-
-function stopZeroPreview(){
- if(!activeZeroPreview)return;
- const preview=activeZeroPreview;activeZeroPreview=null;
- preview.pause();preview.closest('.zero-card-media').classList.remove('is-previewing');
- // Release the full source as soon as the pointer leaves, including any download.
- preview.removeAttribute('src');preview.load();
+const zeroMotionButton=document.getElementById('zero-motion');
+const visibleZeroPreviews=new Set();
+let zeroPaused=zeroPreviewMotion.matches;
+const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function updateZeroMotion(){zeroMotionButton.textContent=zeroPaused?'Play previews':'Pause previews';zeroMotionButton.setAttribute('aria-pressed',String(zeroPaused));}
+function stopZeroPreview(){document.querySelectorAll('.zero-card-preview').forEach(v=>v.pause());}
+function startZeroPreview(v){
+ if(zeroPaused||document.hidden||zeroTaskDialog.open||introDialog.open||!v.isConnected||!visibleZeroPreviews.has(v))return;
+ if(!v.getAttribute('src')){v.src=v.dataset.previewSrc;v.muted=true;}
+ v.play().catch(()=>{});
 }
-function startZeroPreview(preview){
- if(zeroPreviewMotion.matches||document.hidden||zeroTaskDialog.open||!window.matchMedia('(hover: hover) and (pointer: fine)').matches)return;
- stopZeroPreview();activeZeroPreview=preview;
- preview.src=preview.dataset.previewSrc;
- preview.play().then(()=>{
-  if(activeZeroPreview===preview)preview.closest('.zero-card-media').classList.add('is-previewing');
-  else preview.pause();
- }).catch(()=>{});
-}
+function resumeZeroPreviews(){visibleZeroPreviews.forEach(startZeroPreview);}
+const zeroPreviewObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+ if(e.isIntersecting&&e.intersectionRatio>=.25){visibleZeroPreviews.add(e.target);startZeroPreview(e.target);}
+ else{visibleZeroPreviews.delete(e.target);e.target.pause();}
+}),{threshold:[0,.25]});
+zeroMotionButton.addEventListener('click',()=>{zeroPaused=!zeroPaused;updateZeroMotion();zeroPaused?stopZeroPreview():resumeZeroPreviews();});
+zeroPreviewMotion.addEventListener('change',e=>{zeroPaused=e.matches;updateZeroMotion();zeroPaused?stopZeroPreview():resumeZeroPreviews();});
+updateZeroMotion();
 function renderZero(category='all'){
- stopZeroPreview();
- zeroPreviewObserver.disconnect();
+ stopZeroPreview();zeroPreviewObserver.disconnect();visibleZeroPreviews.clear();
  const restoreFilterFocus=document.activeElement?.hasAttribute('data-zero-filter');
  visibleZeroTasks=zeroTasks.filter(t=>category==='all'||t.category===category);
  const gallery=document.getElementById('zero-gallery');
- gallery.innerHTML=visibleZeroTasks.map(({category:group,item:[name,title]},index)=>`<article class="zero-task-card"><button class="zero-task-open" data-zero-task="${index}" type="button" aria-label="View ${title}${multiView.has(name)?' in two camera views':''}"><span class="zero-card-media"><img src="assets/posters/presentation/${name}.webp?v=7" alt="" loading="lazy" width="960" height="540"><video class="zero-card-preview" data-preview-src="assets/videos/presentation/${name}.mp4?v=7" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video><span class="zero-view-count">${multiView.has(name)?'2 views':'1 view'}</span><span class="zero-card-play" aria-hidden="true">▷</span></span><span class="zero-card-copy"><span class="zero-card-title">${title}</span><span class="zero-card-category">${zeroCategories[group]}</span></span></button></article>`).join('');
- gallery.querySelectorAll('.zero-task-open').forEach(button=>{
-  const preview=button.querySelector('video');
-  button.addEventListener('pointerenter',()=>startZeroPreview(preview));
-  button.addEventListener('pointerleave',()=>{if(activeZeroPreview===preview)stopZeroPreview();});
-  preview.addEventListener('timeupdate',()=>{if(activeZeroPreview===preview&&preview.currentTime>=6)preview.currentTime=0;});
-  zeroPreviewObserver.observe(button);
- });
- document.getElementById('zero-gallery-summary').textContent=`${visibleZeroTasks.length}${category==='all'?'':` of ${zeroTasks.length}`} tasks · Pretrained checkpoint`;
+ gallery.innerHTML=visibleZeroTasks.map((clip,index)=>`<article class="zero-task-card"><button class="zero-task-open" data-zero-task="${index}" type="button" aria-label="Watch ${escapeHTML(clip.title)}"><span class="zero-card-media"><video class="zero-card-preview" data-preview-src="${escapeHTML(clip.src)}" poster="${escapeHTML(clip.poster)}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video><span class="zero-card-play" aria-hidden="true">↗</span></span><span class="zero-card-copy"><span class="zero-card-title">${escapeHTML(clip.title)}</span></span></button></article>`).join('');
+ gallery.querySelectorAll('.zero-card-preview').forEach(v=>zeroPreviewObserver.observe(v));
+ document.getElementById('zero-gallery-summary').textContent=`${visibleZeroTasks.length}${category==='all'?'':` / ${zeroTasks.length}`} recordings · Pretrained policy`;
  const filters=document.getElementById('zero-gallery-filters');
  filters.hidden=zeroTasks.length<9;
  if(!filters.hidden){
   filters.innerHTML=[['all','All',zeroTasks.length],...Object.entries(zeroCategories).map(([key,label])=>[key,label,zeroTasks.filter(t=>t.category===key).length])].filter(([, ,count])=>count>0).map(([key,label,count])=>`<button type="button" data-zero-filter="${key}" class="${category===key?'active':''}" aria-pressed="${category===key}">${label} <span>${count}</span></button>`).join('');
-  if(restoreFilterFocus)filters.querySelector(`[data-zero-filter="${category}"]`).focus({preventScroll:true});
+  if(restoreFilterFocus)filters.querySelector(`[data-zero-filter="${category}"]`)?.focus({preventScroll:true});
  }
 }
 function clearZeroPlayer(){
- zeroPlayer.querySelectorAll('video').forEach(v=>{
-  v.pause();mediaObserver.unobserve(v);v.removeAttribute('src');v.querySelectorAll('source').forEach(s=>s.removeAttribute('src'));v.load();
- });
+ zeroPlayer.querySelectorAll('video').forEach(v=>{v.pause();mediaObserver.unobserve(v);v.removeAttribute('src');v.querySelectorAll('source').forEach(s=>s.removeAttribute('src'));v.load();});
  zeroPlayer.replaceChildren();
 }
 function showZeroTask(index,trigger){
- stopZeroPreview();clearZeroPlayer();zeroTaskIndex=index;
- if(trigger)zeroTaskTrigger=trigger;
- const [name,title,description]=visibleZeroTasks[index].item;
- const paired=multiView.has(name);
- document.getElementById('task-dialog-title').textContent=title;
- document.getElementById('task-dialog-description').textContent=description;
+ stopZeroPreview();clearZeroPlayer();zeroTaskIndex=index;if(trigger)zeroTaskTrigger=trigger;
+ const clip=visibleZeroTasks[index];
+ document.getElementById('task-dialog-title').textContent=clip.title;
+ document.getElementById('task-dialog-description').textContent=({'robot':'Robot view','third-person':'Third-person view'}[clip.camera_view]||clip.camera_view||'Robot demonstration');
  document.getElementById('task-dialog-position').textContent=`${index+1} / ${visibleZeroTasks.length}`;
  zeroTaskDialog.querySelector('[data-zero-prev]').disabled=index===0;
  zeroTaskDialog.querySelector('[data-zero-next]').disabled=index===visibleZeroTasks.length-1;
- const view=(suffix,label)=>`<figure class="zero-camera-panel"><figcaption>${label}</figcaption><div class="video-wrap">${video(name+suffix,title+' — '+label)}</div></figure>`;
- zeroPlayer.innerHTML=`<div class="zero-camera-pair ${paired?'':'single-camera'}">${view('','Third-person')}${paired?view('-ego','Robot view'):''}</div>`;
- const play=document.getElementById('task-dialog-play');
- play.dataset.videoCount=paired?'2':'1';play.textContent=paired?'▶ Play both from the start':'▶ Play from the start';
- document.getElementById('task-dialog-note').textContent=paired?'Two views of the same task · action-aligned, not hardware-synchronized. Playback speed is stated in each video.':'Third-person recording · playback speed is stated in the video.';
+ zeroPlayer.innerHTML=`<div class="zero-camera-pair single-camera"><figure class="zero-camera-panel"><div class="video-wrap"><video controls muted loop playsinline preload="metadata" poster="${escapeHTML(clip.poster)}" aria-label="${escapeHTML(clip.title)}"><source src="${escapeHTML(clip.src)}" type="video/mp4"></video></div></figure></div>`;
+ const legacy=clip.legacy_id;
+ if(legacy&&multiView.has(legacy)){
+  zeroPlayer.insertAdjacentHTML('beforeend',`<details class="research-details legacy-camera-views"><summary>Additional two-camera recording</summary><div class="zero-camera-pair">${['','-ego'].map(suffix=>`<figure class="zero-camera-panel"><figcaption>${suffix?'Robot view':'Third-person'}</figcaption><div class="video-wrap">${video(legacy+suffix,clip.title)}</div></figure>`).join('')}</div></details>`);
+ }
+ const play=document.getElementById('task-dialog-play');play.textContent='↻ Restart recording';
+ document.getElementById('task-dialog-note').textContent=[clip.playback_note,clip.note].filter(Boolean).join(' ');
  if(!zeroTaskDialog.open){zeroTaskDialog.showModal();document.body.classList.add('task-dialog-open');}
- watchMedia();
+ watchMedia();zeroPlayer.querySelector('video').play().catch(()=>{});
 }
 zeroTaskDialog.querySelector('.task-dialog-close').addEventListener('click',()=>zeroTaskDialog.close());
 zeroTaskDialog.addEventListener('click',e=>{if(e.target===zeroTaskDialog)zeroTaskDialog.close();});
-zeroTaskDialog.addEventListener('close',()=>{clearZeroPlayer();document.body.classList.remove('task-dialog-open');zeroTaskTrigger?.focus({preventScroll:true});});
-zeroPreviewMotion.addEventListener('change',e=>{if(e.matches)stopZeroPreview();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopZeroPreview();});
-const zeroPreviewObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting&&activeZeroPreview&&e.target.contains(activeZeroPreview))stopZeroPreview();}));
-function goalCard([name,title,description,editName=name],i,type){
- const source=type==='human'?'Human goal image':'Visual goal';
- return `<article class="goal-case" data-case-name="${editName}"><div class="goal-input"><div class="goal-thumbnail"><button data-figure="assets/goals/${name}.webp" data-caption="${source}: ${title}" aria-label="Enlarge ${source.toLowerCase()}: ${title}"><img src="assets/goals/${name}.webp" alt="${source}: ${title}" loading="lazy"></button></div><div class="goal-input-copy"><span class="case-label">${source} ${i===0?'A':'B'}</span><h4>${title}</h4><p>${description}</p></div><span class="goal-arrow" aria-hidden="true">↓</span></div><div class="video-wrap">${video(editName,`Robot execution: ${title}`,true)}</div><div class="goal-output-label"><span>Robot execution ${i===0?'A':'B'}</span><span>${type==='pretrained'?'Pretrained checkpoint':'After task post-training'}</span></div>${multiView.has(editName)?'<p class="camera-note">Action-aligned views · playback speed is stated in the video.</p>':''}</article>`;
+zeroTaskDialog.addEventListener('close',()=>{clearZeroPlayer();document.body.classList.remove('task-dialog-open');zeroTaskTrigger?.focus({preventScroll:true});resumeZeroPreviews();});
+zeroPlayer.addEventListener('toggle',e=>{if(e.target.matches('.legacy-camera-views')&&!e.target.open)e.target.querySelectorAll('video').forEach(v=>v.pause());},true);
+async function loadZeroGallery(){
+ try{const response=await fetch('assets/zero-shot-gallery.json?v=22');if(!response.ok)throw Error('Gallery unavailable');const data=await response.json();if(!data.clips?.length)throw Error('Empty gallery');zeroTasks=data.clips;renderZero();}
+ catch(error){console.warn('Using the existing demonstration gallery.',error);}
 }
-const goalInsights={
- pretrained:{positioning:['Tabletop location → top of the purple block.','The bottle is moved toward different spatial targets.','Goal-responsive positioning is visible before task post-training; these excerpts do not establish completed-task success.']},
- organization:{
- drawers:['Upper drawer → middle drawer.','The robot places the tape roll and tape measure in the specified drawer.','The visual goal controls the destination after task specialization.'],
- toys:['Swap the toy categories assigned to each bin.','Cars and plush toys are routed to the newly specified containers.','Object-to-container assignments change with the goal image.'],
- holders:['Swap the holders assigned to the glue stick and pens.','The same object types are placed in different holders.','Goal conditioning controls object assignments within the specialized task.'],
- books:['Green book on top → purple book on top; change the stack location.','The robot changes the order and position of the book stack.','The goal specifies object relations as well as destinations.']},
- human:{
- books:['Human goal: brown notebook in the right slot → left slot.','The robot places the notebook in the human-specified slot.','Qualitative evidence that a human-view object relation can guide robot execution.'],
- mugs:['Human goal: mug near the monitor → near the file rack.','The robot moves the mug toward the location shown by the human goal.','The goal interface transfers the target relation across human and robot appearances.']}
-};
-function renderReasoning(type,key){const el=document.getElementById(`${type}-reasoning`);if(el)el.innerHTML=goalInsights[type][key].map((t,i)=>`<div><span>${['Goal change','Behavior change','What this shows'][i]}</span><p>${t}</p></div>`).join('');}
-const watchFor={organization:{drawers:'Watch which drawer receives the tape roll and tape measure.',toys:'Watch the toy categories swap containers.',holders:'Watch the glue stick and pens change holders.',books:'Watch the top book and the position of the stack.'},human:{books:'Watch the brown notebook move to the human-specified slot.',mugs:'Watch the mug follow the human-specified location.'}};
+const goalClipMetadata=new Map();
+function goalSpeed(name){return goalClipMetadata.get(name)?.speedLabel||'';}
+async function loadGoalMetadata(){
+ try{const response=await fetch('assets/clean-goal-manifest.json?v=22');if(!response.ok)return;const data=await response.json();data.clips.forEach(clip=>goalClipMetadata.set(clip.id,clip));document.querySelectorAll('[data-goal-speed]').forEach(el=>el.textContent=goalSpeed(el.dataset.goalSpeed));}catch{}
+}
+function goalCard([name,title,description,editName=name],i,type){
+ const source=type==='human'?'Human goal':'Visual goal';
+ return `<article class="goal-case" data-case-name="${editName}"><div class="goal-input"><div class="goal-thumbnail"><button data-figure="assets/goals/${name}.webp" data-caption="${source}: ${title}" aria-label="Enlarge ${source.toLowerCase()}: ${title}"><img src="assets/goals/${name}.webp" alt="${source}: ${title}" loading="lazy"></button></div><div class="goal-input-copy"><span class="case-label">${source} ${i===0?'A':'B'}</span><h4>${title}</h4></div></div><div class="video-wrap">${video(editName,`Robot execution: ${title}`,true)}</div><div class="goal-output-label"><span>Robot execution</span><span data-goal-speed="${editName}">${goalSpeed(editName)}</span></div></article>`;
+}
 function renderGoals(type,key){
- renderReasoning(type,key);replaceGallery(`${type}-gallery`,media[type][key].map((item,i)=>goalCard(item,i,type)).join(''));setPressed(type,key);
- const hint=document.getElementById(`${type}-watch`);if(hint)hint.textContent=watchFor[type][key];
+ replaceGallery(`${type}-gallery`,media[type][key].map((item,i)=>goalCard(item,i,type)).join(''));setPressed(type,key);
  const playButton=document.querySelector(`[data-play-pair="${type}-gallery"]`);if(playButton)playButton.textContent='▶ Play both from the start';
  const controls=playButton.closest('.pair-controls');controls.querySelector('.pair-camera-control')?.remove();
  const paired=media[type][key].every(item=>multiView.has(item[3]||item[0]));
@@ -135,10 +120,10 @@ function renderLong(key){const d=longTasks[key];replaceGallery('long-stage',vide
 renderZero();renderGoals('pretrained','positioning');renderGoals('organization','drawers');renderGoals('human','books');renderLong('desk');
 
 const studies={
- scaling:{src:'assets/figures/ego-scaling-v20.png',alt:'Pure egocentric pretraining scaling from 100 to 50,000 hours; Scene-OOD and Random success improve after robot adaptation.',caption:'Pure ego pretraining → robot adaptation. Best checkpoint per setting; 50 clean demonstrations per task. Dashed curves are descriptive fits.'},
- efficiency:{src:'assets/figures/efficiency.webp',alt:'Robot demonstration efficiency after egocentric pretraining with varying robot demonstration budgets.',caption:'Robot-data efficiency after adaptation: compare egocentric pretraining budgets across numbers of robot demonstrations per task. This measures robot demonstration efficiency, not compute efficiency.'}
+ scaling:{src:'assets/figures/ego-scaling-v20.png',alt:'Pure egocentric pretraining scaling from 100 to 50,000 hours; Scene-OOD and Random success improve after robot adaptation.',caption:'Evaluated after robot adaptation.',detail:'Pure ego pretraining → robot adaptation. Best checkpoint per setting; 50 clean demonstrations per task. Dashed curves are descriptive fits.'},
+ efficiency:{src:'assets/figures/efficiency.webp',alt:'Robot demonstration efficiency after egocentric pretraining with varying robot demonstration budgets.',caption:'Robot demonstrations needed after adaptation.',detail:'Compare egocentric pretraining budgets across robot demonstrations per task; this is data efficiency, not compute efficiency.'}
 };
-function swapCameraVideo(container,name,edited=false){const old=container.querySelector('video');const time=old.currentTime;const playing=!old.paused&&!old.ended;const label=old.getAttribute('aria-label');old.pause();old.outerHTML=video(name,label,edited);const next=container.querySelector('video');next.addEventListener('loadedmetadata',()=>{next.currentTime=Math.min(time,Math.max(0,next.duration-.05));if(playing)next.play().catch(()=>{});},{once:true});next.load();}
+function swapCameraVideo(container,name,edited=false){const old=container.querySelector('video');const time=old.currentTime;const playing=!old.paused&&!old.ended;const label=old.getAttribute('aria-label');old.pause();old.outerHTML=video(name,label,edited);const next=container.querySelector('video');next.addEventListener('loadedmetadata',()=>{next.currentTime=Math.min(time,Math.max(0,next.duration-.05));if(playing)next.play().catch(()=>{});},{once:true});next.load();const speed=container.querySelector('[data-goal-speed]');if(speed){speed.dataset.goalSpeed=name;speed.textContent=goalSpeed(name);}}
 const dialog=document.getElementById('figure-dialog');
 let figureTrigger=null;
 document.addEventListener('click',e=>{
@@ -153,11 +138,11 @@ document.addEventListener('click',e=>{
  const zeroFilter=e.target.closest('[data-zero-filter]');if(zeroFilter)renderZero(zeroFilter.dataset.zeroFilter);
  if(e.target.closest('[data-zero-prev]')&&zeroTaskIndex>0)showZeroTask(zeroTaskIndex-1);
  if(e.target.closest('[data-zero-next]')&&zeroTaskIndex<visibleZeroTasks.length-1)showZeroTask(zeroTaskIndex+1);
- const pairButton=e.target.closest('[data-play-pair]');if(pairButton){const videos=[...document.getElementById(pairButton.dataset.playPair).querySelectorAll('video')];for(const v of videos)v.currentTime=0;Promise.allSettled(videos.map(v=>v.play())).then(results=>{if(!pairButton.isConnected||videos.some(v=>!v.isConnected))return;pairButton.textContent=results.some(r=>r.status==='rejected')?'Use the video play control':videos.length>1?'↻ Replay both from the start':'↻ Replay from the start';});}
+ const pairButton=e.target.closest('[data-play-pair]');if(pairButton){const videos=[...document.getElementById(pairButton.dataset.playPair).querySelectorAll('video')].filter(v=>!v.closest('details:not([open])')); for(const v of videos)v.currentTime=0;Promise.allSettled(videos.map(v=>v.play())).then(results=>{if(!pairButton.isConnected||videos.some(v=>!v.isConnected))return;pairButton.textContent=results.some(r=>r.status==='rejected')?'Use the video play control':videos.length>1?'↻ Replay both from the start':'↻ Replay from the start';});}
  for(const type of ['organization','human']){const tab=e.target.closest(`[data-${type}]`);if(tab)renderGoals(type,tab.dataset[type]);}
  const task=e.target.closest('[data-long]');if(task)renderLong(task.dataset.long);
  const view=e.target.closest('[data-view]');if(view&&!view.classList.contains('active')){swapCameraVideo(document.getElementById('long-stage'),view.dataset.view);setPressed('view',view.dataset.view);}
- const study=e.target.closest('[data-study]');if(study){const d=studies[study.dataset.study];document.getElementById('study-image').src=d.src;document.getElementById('study-image').alt=d.alt;document.getElementById('study-caption').textContent=d.caption;const b=document.getElementById('study-enlarge');b.dataset.figure=d.src;b.dataset.caption=d.caption;setPressed('study',study.dataset.study);}
+ const study=e.target.closest('[data-study]');if(study){const d=studies[study.dataset.study];document.getElementById('study-image').src=d.src;document.getElementById('study-image').alt=d.alt;document.getElementById('study-caption').textContent=d.caption;const b=document.getElementById('study-enlarge');b.dataset.figure=d.src;b.dataset.caption=d.detail;setPressed('study',study.dataset.study);}
  const figure=e.target.closest('[data-figure]');if(figure){figureTrigger=figure;const img=document.getElementById('dialog-image');img.src=figure.dataset.figure;img.alt=figure.dataset.caption;document.getElementById('dialog-caption').textContent=figure.dataset.caption;dialog.showModal();document.body.classList.add('dialog-open');}
 });
 function closeFigure(){dialog.close();}
@@ -165,13 +150,14 @@ document.querySelector('.dialog-close').addEventListener('click',closeFigure);
 dialog.addEventListener('click',e=>{if(e.target===dialog)closeFigure();});
 dialog.addEventListener('close',()=>{document.body.classList.remove('dialog-open');if(figureTrigger)figureTrigger.focus();});
 // Paired goal videos may play together; other sections pause to keep attention local.
-document.addEventListener('play',e=>{if(e.target.tagName!=='VIDEO')return;const pair=e.target.closest('.goal-comparison, .media-play-group');document.querySelectorAll('video').forEach(v=>{if(v!==e.target&&(!pair||!pair.contains(v)))v.pause();});},true);
+document.addEventListener('play',e=>{if(e.target.tagName!=='VIDEO'||e.target.classList.contains('zero-card-preview'))return;const pair=e.target.closest('.goal-comparison, .media-play-group');document.querySelectorAll('video').forEach(v=>{if(v!==e.target&&(!pair||!pair.contains(v)))v.pause();});},true);
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const visiblePreviewLoops=new Set();
 const bonusGroup=document.querySelector('.bonus-pair');
 const bonusMotion=document.getElementById('bonus-motion');
 let bonusPaused=reduceMotion.matches;
 function playPreviewLoop(v){
+ if(introDialog.open||zeroTaskDialog.open)return;
  const enabled=bonusGroup.contains(v)?!bonusPaused:!reduceMotion.matches;
  if(enabled&&!document.hidden&&visiblePreviewLoops.has(v))v.play().catch(()=>{});
 }
@@ -187,9 +173,9 @@ const mediaObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
 }),{threshold:[0,.25]});
 reduceMotion.addEventListener('change',e=>{if(e.matches){bonusPaused=true;updateBonusMotion();visiblePreviewLoops.forEach(v=>v.pause());}});
 const observedVideos=new WeakSet();
-function watchMedia(){document.querySelectorAll('video').forEach(v=>{if(!observedVideos.has(v)){mediaObserver.observe(v);observedVideos.add(v);}});}
+function watchMedia(){document.querySelectorAll('video:not(.zero-card-preview)').forEach(v=>{if(!observedVideos.has(v)){mediaObserver.observe(v);observedVideos.add(v);}});}
 new MutationObserver(records=>{records.forEach(r=>r.removedNodes.forEach(n=>{if(n.nodeType===1){if(n.tagName==='VIDEO')mediaObserver.unobserve(n);n.querySelectorAll('video').forEach(v=>mediaObserver.unobserve(v));}}));watchMedia();}).observe(document.querySelector('main'),{childList:true,subtree:true});watchMedia();
-document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>v.pause());else visiblePreviewLoops.forEach(playPreviewLoop);});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>v.pause());else {visiblePreviewLoops.forEach(playPreviewLoop);resumeZeroPreviews();}});
 
 const nav=document.querySelector('nav'),menu=document.querySelector('.menu-toggle');
 function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');}
@@ -210,3 +196,10 @@ document.querySelector('[data-citation-link]')?.addEventListener('click', () => 
   const citation = document.querySelector('#citation .citation-details');
   if (citation) citation.open = true;
 });
+
+// Keep the complete project film behind a single, explicit entry point.
+document.querySelector('[data-open-intro]').addEventListener('click',()=>{stopZeroPreview();document.querySelectorAll('video').forEach(v=>v.pause());introDialog.showModal();document.body.classList.add('intro-open');introDialog.querySelector('video').play().catch(()=>{});});
+document.querySelector('[data-close-intro]').addEventListener('click',()=>introDialog.close());
+introDialog.addEventListener('click',e=>{if(e.target===introDialog)introDialog.close();});
+introDialog.addEventListener('close',()=>{introDialog.querySelector('video').pause();document.body.classList.remove('intro-open');visiblePreviewLoops.forEach(playPreviewLoop);resumeZeroPreviews();});
+loadZeroGallery();loadGoalMetadata();
