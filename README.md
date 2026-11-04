@@ -28,7 +28,9 @@ When moving to a different site address, update the canonical URL, `og:url`, and
 
 The zero-shot gallery lists 20 recordings in `assets/zero-shot-gallery.json`. Visible previews play muted and loop; offscreen previews pause. The pause button and reduced-motion preference control automatic playback.
 
-Goal comparisons use clean robot footage from `assets/videos/clean-goals/`, with one goal image and playback-speed label displayed by the page. The complete introduction remains available through the **Film** button.
+Goal comparisons use clean robot footage from `assets/videos/clean-goals/`. Four Goal ICL experiments and two human-goal experiments are shown in document order, each with its own paired playback controls. The goal images have responsive highlights from `goal-annotations.js`, including when enlarged; original images are unchanged.
+
+The complete project film opens the page and plays muted. Scrolling fades the film into the paper title and authors; offscreen playback pauses. The **Film** navigation link returns to it. Reduced-motion preferences disable the crossfade and automatic film playback.
 
 To regenerate the media from the original research recordings:
 

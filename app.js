@@ -10,8 +10,8 @@ const media = {
  },
  organization: {
   drawers: [ ['desk-upper','The upper drawer','The goal specifies the upper drawer for the tape roll and tape measure.'], ['desk-middle','The middle drawer','A different visual goal changes the storage destination.'] ],
-  toys: [ ['toy-reference','Cars in blue. Plush toys in white.','The goal assigns each toy category to a container.'], ['toy-swap','Swap the destinations','Reverse the category-to-bin assignment through the goal image.'] ],
-  holders: [ ['desk-holders-a','Choose the holders','Collect the glue stick and pens into the indicated holders.'], ['desk-holders-b','Swap the holders','Change the destinations while keeping the policy fixed.'] ],
+  toys: [ ['toy-reference','Cars in blue. Plush toys in white.','The goal assigns each toy category to a container.'], ['toy-swap','Plush toys in blue. Cars in white.','Reverse the category-to-bin assignment through the goal image.'] ],
+  holders: [ ['desk-holders-a','Glue on the left. Pens on the right.','Collect the glue stick and pens into the indicated holders.'], ['desk-holders-b','Pens on the left. Glue on the right.','Change the destinations while keeping the policy fixed.'] ],
   books: [ ['toy-reference','Green-covered book on top','Arrange the books in the order specified by the goal.','toy-reference-books'], ['toy-books','Purple-covered book on top','Change the order and move the stack closer to the white bin.'] ]
  },
  human: {
@@ -29,7 +29,6 @@ const legacyZeroTasks=Object.entries(media.zero).flatMap(([category,items])=>ite
 let zeroTasks=legacyZeroTasks,visibleZeroTasks=zeroTasks,zeroTaskIndex=0,zeroTaskTrigger=null;
 const zeroTaskDialog=document.getElementById('zero-task-dialog');
 const zeroPlayer=document.getElementById('zero-task-player');
-const introDialog=document.getElementById('intro-dialog');
 const zeroPreviewMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const zeroMotionButton=document.getElementById('zero-motion');
 const visibleZeroPreviews=new Set();
@@ -38,7 +37,7 @@ const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<
 function updateZeroMotion(){zeroMotionButton.textContent=zeroPaused?'Play previews':'Pause previews';zeroMotionButton.setAttribute('aria-pressed',String(zeroPaused));}
 function stopZeroPreview(){document.querySelectorAll('.zero-card-preview').forEach(v=>v.pause());}
 function startZeroPreview(v){
- if(zeroPaused||document.hidden||zeroTaskDialog.open||introDialog.open||!v.isConnected||!visibleZeroPreviews.has(v))return;
+ if(zeroPaused||document.hidden||zeroTaskDialog.open||!v.isConnected||!visibleZeroPreviews.has(v))return;
  if(!v.getAttribute('src')){v.src=v.dataset.previewSrc;v.muted=true;}
  v.play().catch(()=>{});
 }
@@ -100,24 +99,35 @@ function goalSpeed(name){return goalClipMetadata.get(name)?.speedLabel||'';}
 async function loadGoalMetadata(){
  try{const response=await fetch('assets/clean-goal-manifest.json?v=22');if(!response.ok)return;const data=await response.json();data.clips.forEach(clip=>goalClipMetadata.set(clip.id,clip));document.querySelectorAll('[data-goal-speed]').forEach(el=>el.textContent=goalSpeed(el.dataset.goalSpeed));}catch{}
 }
+function goalMarks(name){
+ return (goalAnnotations[name]||[]).map(mark=>`<span class="goal-mark" style="left:${mark.rect[0]}%;top:${mark.rect[1]}%;width:${mark.rect[2]}%;height:${mark.rect[3]}%"><span class="goal-mark-tag${mark.align==='end'?' align-end':''}${mark.placement==='below'?' below':''}">${escapeHTML(mark.label)}</span></span>`).join('');
+}
 function goalCard([name,title,description,editName=name],i,type){
  const source=type==='human'?'Human goal':'Visual goal';
- return `<article class="goal-case" data-case-name="${editName}"><div class="goal-input"><div class="goal-thumbnail"><button data-figure="assets/goals/${name}.webp" data-caption="${source}: ${title}" aria-label="Enlarge ${source.toLowerCase()}: ${title}"><img src="assets/goals/${name}.webp" alt="${source}: ${title}" loading="lazy"></button></div><div class="goal-input-copy"><span class="case-label">${source} ${i===0?'A':'B'}</span><h4>${title}</h4></div></div><div class="video-wrap">${video(editName,`Robot execution: ${title}`,true)}</div><div class="goal-output-label"><span>Robot execution</span><span data-goal-speed="${editName}">${goalSpeed(editName)}</span></div></article>`;
+ return `<article class="goal-case" data-case-name="${editName}"><div class="goal-input"><div class="goal-input-copy"><span class="case-label">${source} ${i===0?'A':'B'}</span><h4>${title}</h4></div><div class="goal-thumbnail"><button class="annotated-goal" data-goal-annotation="${editName}" data-figure="assets/goals/${name}.webp" data-caption="${source}: ${title}" aria-label="Enlarge annotated ${source.toLowerCase()}: ${title}"><img src="assets/goals/${name}.webp" alt="${source}: ${title}" width="${name.startsWith('goal-position-')?632:1200}" height="${name.startsWith('goal-position-')?304:675}" loading="lazy"><span class="goal-marks" aria-hidden="true">${goalMarks(editName)}</span><span class="goal-enlarge" aria-hidden="true">↗</span></button></div></div><div class="video-wrap">${video(editName,`Robot execution: ${title}`,true)}</div><div class="goal-output-label"><span>Robot execution</span><span data-goal-speed="${editName}">${goalSpeed(editName)}</span></div></article>`;
 }
-function renderGoals(type,key){
- replaceGallery(`${type}-gallery`,media[type][key].map((item,i)=>goalCard(item,i,type)).join(''));setPressed(type,key);
- const playButton=document.querySelector(`[data-play-pair="${type}-gallery"]`);if(playButton)playButton.textContent='▶ Play both from the start';
- const controls=playButton.closest('.pair-controls');controls.querySelector('.pair-camera-control')?.remove();
+function renderGoals(type,key,galleryId=`${type}-gallery`){
+ replaceGallery(galleryId,media[type][key].map((item,i)=>goalCard(item,i,type)).join(''));
+ const playButton=document.querySelector(`[data-play-pair="${galleryId}"]`);
+ const controls=playButton.closest('.pair-controls');
  const paired=media[type][key].every(item=>multiView.has(item[3]||item[0]));
- if(paired)controls.insertAdjacentHTML('afterbegin',`<div class="segmented pair-camera-control" role="group" aria-label="Camera for both ${type} comparison videos"><button data-pair-camera="third" data-pair-type="${type}" class="active" aria-pressed="true">Third-person</button><button data-pair-camera="ego" data-pair-type="${type}" aria-pressed="false">Robot view</button></div>`);
- controls.append(playButton);
+ if(paired)controls.insertAdjacentHTML('afterbegin',`<div class="segmented pair-camera-control" role="group" aria-label="Camera for ${type} ${key} videos"><button data-pair-camera="third" data-pair-gallery="${galleryId}" class="active" aria-pressed="true">Third-person</button><button data-pair-camera="ego" data-pair-gallery="${galleryId}" aria-pressed="false">Robot view</button></div>`);
+}
+const goalGroupTitles={drawers:'Drawer placement',toys:'Toy destinations',holders:'Object holders',books:'Book order'};
+function renderGoalExperiments(type){
+ const groups=Object.keys(media[type]);
+ document.getElementById(`${type}-experiments`).innerHTML=groups.map((key,i)=>{
+  const title=type==='human'?(key==='books'?'Notebook arrangement':'Mug placement'):goalGroupTitles[key];
+  return `<section class="goal-experiment" aria-labelledby="${type}-${key}-heading"><div class="goal-experiment-heading"><h3 id="${type}-${key}-heading"><span>${String(i+1).padStart(2,'0')}</span>${title}</h3><div class="pair-controls"><button class="button secondary play-pair" data-play-pair="${type}-${key}-gallery">▶ Play both from the start</button></div></div><div class="goal-comparison" id="${type}-${key}-gallery"></div></section>`;
+ }).join('');
+ groups.forEach(key=>renderGoals(type,key,`${type}-${key}-gallery`));
 }
 const longTasks={
  desk:{name:'long-desk',title:'A desk, progressively organized.',description:'Mug placement, stationery collection, drawer storage, and notebook arrangement in one recorded sequence.',steps:['Cup','Stationery','Drawers','Books'],protocol:'After task-specific post-training'},
  household:{name:'long-household',title:'From tabletop to household.',description:'Toy sorting, book stacking, bottle disposal, and garment collection across several work areas.',steps:['Toys & books','Bottle disposal','Garments','Back to the desk'],protocol:'After task-specific post-training · 2× speed'}
 };
 function renderLong(key){const d=longTasks[key];replaceGallery('long-stage',video(d.name,d.title));document.getElementById('long-title').textContent=d.title;document.getElementById('long-description').textContent=d.description;document.getElementById('long-protocol').textContent=d.protocol;document.getElementById('long-sequence').innerHTML=d.steps.map(t=>`<span>${t}</span>`).join('<i aria-hidden="true">→</i>');document.querySelector('.view-switch').hidden=key!=='desk';setPressed('long',key);setPressed('view','long-desk');}
-renderZero();renderGoals('pretrained','positioning');renderGoals('organization','drawers');renderGoals('human','books');renderLong('desk');
+renderZero();renderGoals('pretrained','positioning');renderGoalExperiments('organization');renderGoalExperiments('human');renderLong('desk');
 
 const studies={
  scaling:{src:'assets/figures/ego-scaling-v20.png',alt:'Pure egocentric pretraining scaling from 100 to 50,000 hours; Scene-OOD and Random success improve after robot adaptation.',caption:'Evaluated after robot adaptation.',detail:'Pure ego pretraining → robot adaptation. Best checkpoint per setting; 50 clean demonstrations per task. Dashed curves are descriptive fits.'},
@@ -130,7 +140,7 @@ document.addEventListener('click',e=>{
  const camera=e.target.closest('[data-camera]');if(camera&&!camera.classList.contains('active')){const card=camera.closest('article');swapCameraVideo(card,camera.dataset.cameraName+(camera.dataset.camera==='ego'?'-ego':''),camera.dataset.cameraEdited==='true');card.querySelectorAll('[data-camera]').forEach(b=>{const active=b===camera;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});}
 
  const pairCamera=e.target.closest('[data-pair-camera]');if(pairCamera&&!pairCamera.classList.contains('active')){
-  const gallery=document.getElementById(`${pairCamera.dataset.pairType}-gallery`);
+  const gallery=document.getElementById(pairCamera.dataset.pairGallery);
   gallery.querySelectorAll('.goal-case').forEach(card=>swapCameraVideo(card,card.dataset.caseName+(pairCamera.dataset.pairCamera==='ego'?'-ego':''),true));
   pairCamera.closest('.pair-camera-control').querySelectorAll('button').forEach(b=>{const selected=b===pairCamera;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});
  }
@@ -138,12 +148,11 @@ document.addEventListener('click',e=>{
  const zeroFilter=e.target.closest('[data-zero-filter]');if(zeroFilter)renderZero(zeroFilter.dataset.zeroFilter);
  if(e.target.closest('[data-zero-prev]')&&zeroTaskIndex>0)showZeroTask(zeroTaskIndex-1);
  if(e.target.closest('[data-zero-next]')&&zeroTaskIndex<visibleZeroTasks.length-1)showZeroTask(zeroTaskIndex+1);
- const pairButton=e.target.closest('[data-play-pair]');if(pairButton){const videos=[...document.getElementById(pairButton.dataset.playPair).querySelectorAll('video')].filter(v=>!v.closest('details:not([open])')); for(const v of videos)v.currentTime=0;Promise.allSettled(videos.map(v=>v.play())).then(results=>{if(!pairButton.isConnected||videos.some(v=>!v.isConnected))return;pairButton.textContent=results.some(r=>r.status==='rejected')?'Use the video play control':videos.length>1?'↻ Replay both from the start':'↻ Replay from the start';});}
- for(const type of ['organization','human']){const tab=e.target.closest(`[data-${type}]`);if(tab)renderGoals(type,tab.dataset[type]);}
+ const pairButton=e.target.closest('[data-play-pair]');if(pairButton){const videos=[...document.getElementById(pairButton.dataset.playPair).querySelectorAll('video')].filter(v=>!v.closest('details:not([open])')); for(const v of videos)v.currentTime=0;if(!pairButton.closest('dialog'))videos[0]?.scrollIntoView({behavior:reduceMotion.matches?'instant':'smooth',block:'center'});Promise.allSettled(videos.map(v=>v.play())).then(results=>{if(!pairButton.isConnected||videos.some(v=>!v.isConnected))return;pairButton.textContent=results.some(r=>r.status==='rejected')?'Use the video play control':videos.length>1?'↻ Replay both from the start':'↻ Replay from the start';});}
  const task=e.target.closest('[data-long]');if(task)renderLong(task.dataset.long);
  const view=e.target.closest('[data-view]');if(view&&!view.classList.contains('active')){swapCameraVideo(document.getElementById('long-stage'),view.dataset.view);setPressed('view',view.dataset.view);}
  const study=e.target.closest('[data-study]');if(study){const d=studies[study.dataset.study];document.getElementById('study-image').src=d.src;document.getElementById('study-image').alt=d.alt;document.getElementById('study-caption').textContent=d.caption;const b=document.getElementById('study-enlarge');b.dataset.figure=d.src;b.dataset.caption=d.detail;setPressed('study',study.dataset.study);}
- const figure=e.target.closest('[data-figure]');if(figure){figureTrigger=figure;const img=document.getElementById('dialog-image');img.src=figure.dataset.figure;img.alt=figure.dataset.caption;document.getElementById('dialog-caption').textContent=figure.dataset.caption;dialog.showModal();document.body.classList.add('dialog-open');}
+ const figure=e.target.closest('[data-figure]');if(figure){figureTrigger=figure;const img=document.getElementById('dialog-image');img.src=figure.dataset.figure;img.alt=figure.dataset.caption;dialog.classList.toggle('is-goal-figure',!!figure.dataset.goalAnnotation);document.getElementById('dialog-goal-marks').innerHTML=figure.dataset.goalAnnotation?goalMarks(figure.dataset.goalAnnotation):'';document.getElementById('dialog-caption').textContent=figure.dataset.caption;dialog.showModal();document.body.classList.add('dialog-open');}
 });
 function closeFigure(){dialog.close();}
 document.querySelector('.dialog-close').addEventListener('click',closeFigure);
@@ -157,7 +166,7 @@ const bonusGroup=document.querySelector('.bonus-pair');
 const bonusMotion=document.getElementById('bonus-motion');
 let bonusPaused=reduceMotion.matches;
 function playPreviewLoop(v){
- if(introDialog.open||zeroTaskDialog.open)return;
+ if(zeroTaskDialog.open)return;
  const enabled=bonusGroup.contains(v)?!bonusPaused:!reduceMotion.matches;
  if(enabled&&!document.hidden&&visiblePreviewLoops.has(v))v.play().catch(()=>{});
 }
@@ -173,9 +182,9 @@ const mediaObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
 }),{threshold:[0,.25]});
 reduceMotion.addEventListener('change',e=>{if(e.matches){bonusPaused=true;updateBonusMotion();visiblePreviewLoops.forEach(v=>v.pause());}});
 const observedVideos=new WeakSet();
-function watchMedia(){document.querySelectorAll('video:not(.zero-card-preview)').forEach(v=>{if(!observedVideos.has(v)){mediaObserver.observe(v);observedVideos.add(v);}});}
+function watchMedia(){document.querySelectorAll('video:not(.zero-card-preview):not(#hero-video)').forEach(v=>{if(!observedVideos.has(v)){mediaObserver.observe(v);observedVideos.add(v);}});}
 new MutationObserver(records=>{records.forEach(r=>r.removedNodes.forEach(n=>{if(n.nodeType===1){if(n.tagName==='VIDEO')mediaObserver.unobserve(n);n.querySelectorAll('video').forEach(v=>mediaObserver.unobserve(v));}}));watchMedia();}).observe(document.querySelector('main'),{childList:true,subtree:true});watchMedia();
-document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>v.pause());else {visiblePreviewLoops.forEach(playPreviewLoop);resumeZeroPreviews();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video:not(#hero-video)').forEach(v=>v.pause());else {visiblePreviewLoops.forEach(playPreviewLoop);resumeZeroPreviews();}});
 
 const nav=document.querySelector('nav'),menu=document.querySelector('.menu-toggle');
 function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');}
@@ -197,9 +206,4 @@ document.querySelector('[data-citation-link]')?.addEventListener('click', () => 
   if (citation) citation.open = true;
 });
 
-// Keep the complete project film behind a single, explicit entry point.
-document.querySelector('[data-open-intro]').addEventListener('click',()=>{stopZeroPreview();document.querySelectorAll('video').forEach(v=>v.pause());introDialog.showModal();document.body.classList.add('intro-open');introDialog.querySelector('video').play().catch(()=>{});});
-document.querySelector('[data-close-intro]').addEventListener('click',()=>introDialog.close());
-introDialog.addEventListener('click',e=>{if(e.target===introDialog)introDialog.close();});
-introDialog.addEventListener('close',()=>{introDialog.querySelector('video').pause();document.body.classList.remove('intro-open');visiblePreviewLoops.forEach(playPreviewLoop);resumeZeroPreviews();});
 loadZeroGallery();loadGoalMetadata();

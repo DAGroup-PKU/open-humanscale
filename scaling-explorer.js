@@ -25,6 +25,7 @@
   const visibleMetrics = new Set(['random']);
   let playing = false;
   let touring = false;
+  let hasPlayed = false;
   let timer;
   const x = i => 55 + i * 85;
   const activeMetrics = () => metrics.filter(metric => visibleMetrics.has(metric.key));
@@ -60,7 +61,7 @@
       <text class="sx-axis-title" x="280" y="282" text-anchor="middle">Total training data (h)</text>
     </svg>`;
   }
-  host.innerHTML = `<div class="sx-toolbar"><div><h3>One data sweep. Two evaluation settings.</h3></div><div class="sx-play-controls"><button type="button" class="sx-play" aria-pressed="false">▶ Play data tour</button><button type="button" class="sx-reset">Reset</button></div></div>
+  host.innerHTML = `<div class="sx-toolbar"><div><h3>One data sweep. Two evaluation settings.</h3></div><div class="sx-play-controls"><button type="button" class="sx-play" aria-pressed="false">▶ Play data tour</button></div></div>
     <div class="sx-display-controls"><div class="sx-metric-toggles" role="group" aria-label="Results shown in both scaling charts">${metrics.map(metric => `<button type="button" class="sx-metric-toggle sx-${metric.key}" data-sx-metric="${metric.key}" aria-pressed="${visibleMetrics.has(metric.key)}"><span aria-hidden="true">${metric.marker}</span> ${metric.label}</button>`).join('')}</div></div>
     <div class="sx-layout">${panels.map(panel => `<article class="sx-panel" data-sx-panel="${panel.key}"><header><h4>${panel.title}</h4><p>${panel.subtitle}</p></header><div class="sx-chart-mount"></div><div class="sx-scale-caption"></div><div class="sx-values"></div><p class="sx-chart-note"></p></article>`).join('')}</div>
     <details class="research-details"><summary>Evaluation details</summary><p>Each point is an independently trained checkpoint. Matched post-training uses a separate recipe from the 88.65% benchmark result. Post-training labels round the first three robot budgets to 2,000 / 4,200 / 8,000 h.</p></details>
@@ -95,7 +96,7 @@
     playing = false;
     if (!preserveProgress) touring = false;
     playButton.setAttribute('aria-pressed', 'false');
-    playButton.textContent = touring ? '▶ Resume tour' : '▶ Play data tour';
+    playButton.textContent = touring ? '▶ Resume tour' : hasPlayed ? '↻ Replay data tour' : '▶ Play data tour';
   }
   function tick() {
     if (!playing) return;
@@ -107,6 +108,7 @@
   playButton.addEventListener('click', () => {
     if (playing) { stop(true); return; }
     playing = true;
+    hasPlayed = true;
     if (!touring) selected = 0;
     touring = true;
     playButton.textContent = 'Ⅱ Pause tour';
@@ -114,7 +116,6 @@
     render(true);
     timer = setTimeout(tick, tourStepMs);
   });
-  host.querySelector('.sx-reset').addEventListener('click', () => { stop(); selected = 5; visibleMetrics.clear(); visibleMetrics.add('random'); render(true); });
   host.querySelectorAll('[data-sx-metric]').forEach(button => button.addEventListener('click', () => {
     const metric = button.dataset.sxMetric;
     if (visibleMetrics.has(metric) && visibleMetrics.size === 1) return;
