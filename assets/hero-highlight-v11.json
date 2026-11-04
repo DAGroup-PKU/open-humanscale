@@ -1,0 +1,49 @@
+{
+  "id": "goal-highlight-v11",
+  "generator": "scripts/prepare_hero_highlight_v11.py",
+  "source_relative_to_paper": "videos/ICL/人手goal image/case1/case9.mp4",
+  "source_sha256": "6b9ffea26de9d5cc2342fa087ff9a36c45f7ddbe0e31e2497e980af3ceca15ae",
+  "source_interval_seconds": [
+    0,
+    24.566666666666666
+  ],
+  "source_frame_interval": [
+    0,
+    737
+  ],
+  "source_dimensions": [
+    3840,
+    2160
+  ],
+  "source_fps": "30",
+  "goal_image": "assets/goals/human-books-right.webp",
+  "goal_sha256": "14d295d7acaf5c2b2ecae88c06f0f9612760104d5bacb4261eadf690db01a3d8",
+  "output": "assets/videos/presentation/goal-highlight-v11.mp4",
+  "output_sha256": "59264d41c6343c09f802bcd4b97621aada2db50e9ad3b245af3d823660d47621",
+  "poster": "assets/posters/presentation/goal-highlight-v11.webp",
+  "poster_time_seconds": 6.0,
+  "output_duration_seconds": 24.566666666666666,
+  "output_dimensions": [
+    960,
+    540
+  ],
+  "output_fps": "30",
+  "output_frames": 737,
+  "playback_speed_relative_to_source": 1,
+  "source_crop": null,
+  "internal_cuts": [],
+  "end_hold_seconds": 0,
+  "training_setting": "After robot-task post-training",
+  "target": "Brown notebook in the right slot of the file rack",
+  "caption": "Robot execution · 24.6s recorded sequence · 1× source speed",
+  "review": {
+    "method": "Whole source sampled at 2-second intervals, with extra samples at 23, 24 and 24.52 seconds; full output decoded successfully.",
+    "actions": [
+      "Brown notebook picked and placed in the right-hand rack slot, approximately 0–8s.",
+      "Subsequent light-colored notebook lifted and arranged in the rack, approximately 9–16s.",
+      "Last notebook collected and placed; three notebooks visible in the rack by the final frames, approximately 18–24.57s."
+    ],
+    "end_state": "All three notebooks are in the rack; the gripper is withdrawing at the supplied source endpoint. No extra stationary hold is fabricated."
+  },
+  "notes": "Replaces the short v8 hero teaser only. Keeps the unchanged human goal image alongside the execution, and includes subsequent notebook organization beyond the goal-varying first placement. All original video frames are retained; the source recording itself is supplied by the authors."
+}

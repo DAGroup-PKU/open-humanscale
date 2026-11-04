@@ -1,0 +1,75 @@
+{
+  "revision": 9,
+  "generator": "scripts/prepare_continuous_follow_v9.py",
+  "purpose": "Continuous looping video examples; no editorial interruption between demonstration and response.",
+  "clips": [
+    {
+      "id": "human-follow-tea-continuous-v9",
+      "source": "videos/人类演示意图模仿/his乌龙茶影响-1.mp4",
+      "start_frame": 75,
+      "end_frame_exclusive": 610,
+      "poster_source_time": 4.0,
+      "description": "Human bottle interaction followed by the robot bottle response, in one continuous source interval.",
+      "source_base": "paper",
+      "source_sha256": "4ca8b122703a1c1a1261c637a31df48b1a9aee9d09d86a2b8b116217d234cd8e",
+      "source_fps": 30,
+      "source_interval_seconds": [
+        2.5,
+        20.333333333333332
+      ],
+      "source_crop": "crop=640:360:640:0",
+      "continuous_single_interval": true,
+      "middle_wait_retained": true,
+      "editorial_cuts_inside_interval": 0,
+      "inserted_frames": 0,
+      "phase_cards": 0,
+      "playback_speed_relative_to_source": 1,
+      "output": "assets/videos/presentation/human-follow-tea-continuous-v9.mp4",
+      "output_sha256": "914cab6bae8762fee742d31986a331a9e06954561e1fdb5784c6ea804748c68a",
+      "poster": "assets/posters/presentation/human-follow-tea-continuous-v9.webp",
+      "output_duration_seconds": 17.833333,
+      "output_frames": 535,
+      "dimensions": [
+        960,
+        540
+      ],
+      "audio": "muted derivative",
+      "validation": "Full decode and exact source-interval frame-count check passed.",
+      "notes": "The fixed goal-image panel is cropped from the presentation. This does not establish absence of model goal conditioning. The natural wait is retained; no claim of instantaneous response is made."
+    },
+    {
+      "id": "human-follow-object-continuous-v9",
+      "source": "videos/人类演示意图模仿/his真有影响吧-1.mp4",
+      "start_frame": 15,
+      "end_frame_exclusive": 750,
+      "poster_source_time": 2.0,
+      "description": "Human object-to-container demonstration followed by the robot placement response, in one continuous source interval.",
+      "source_base": "paper",
+      "source_sha256": "7758fd3fb7e08e368fea0e063e6e9d09ad423865c58a6bbd7ede504d81dfea38",
+      "source_fps": 30,
+      "source_interval_seconds": [
+        0.5,
+        25.0
+      ],
+      "source_crop": "crop=640:360:640:0",
+      "continuous_single_interval": true,
+      "middle_wait_retained": true,
+      "editorial_cuts_inside_interval": 0,
+      "inserted_frames": 0,
+      "phase_cards": 0,
+      "playback_speed_relative_to_source": 1,
+      "output": "assets/videos/presentation/human-follow-object-continuous-v9.mp4",
+      "output_sha256": "16f176f7697351dc176a72689af161708ccbc001d60d44262f2c724de5eadf0f",
+      "poster": "assets/posters/presentation/human-follow-object-continuous-v9.webp",
+      "output_duration_seconds": 24.5,
+      "output_frames": 735,
+      "dimensions": [
+        960,
+        540
+      ],
+      "audio": "muted derivative",
+      "validation": "Full decode and exact source-interval frame-count check passed.",
+      "notes": "The fixed goal-image panel is cropped from the presentation. This does not establish absence of model goal conditioning. The natural wait is retained; no claim of instantaneous response is made."
+    }
+  ]
+}

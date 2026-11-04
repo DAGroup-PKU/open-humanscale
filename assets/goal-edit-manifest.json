@@ -1,0 +1,1016 @@
+{
+  "schema_version": 2,
+  "description": "Goal-focused excerpts. Corresponding camera action intervals share exact presentation durations with disclosed playback rates; no hardware timestamp synchronization is claimed.",
+  "generator": "scripts/prepare_goal_edits.py",
+  "clips": [
+    {
+      "id": "desk-upper",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "A",
+      "target": "Store in the upper drawer",
+      "view": "third-person",
+      "source": "assets/videos/desk-upper.mp4",
+      "source_base": "dist",
+      "source_sha256": "4e459370212493eff989717a3b29ec0f66c99658b4495504ab8cff2dd1577aad",
+      "goal_image": "assets/goals/desk-upper.webp",
+      "goal_sha256": "a6c923104b0e02ca0fa3e73dc9c7986f01edf851b6406410e723aadc900a6bee",
+      "output": "assets/videos/edited/desk-upper.mp4",
+      "output_sha256": "e8083713eb3e6c698a1adfe30cdd764f3a3a210d3005ed3982350581d2416b6d",
+      "poster": "assets/posters/edited/desk-upper.webp",
+      "source_duration_seconds": 13.6,
+      "output_duration_seconds": 14.4,
+      "source_interval_seconds": [
+        0.4,
+        13.2
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.4
+        ],
+        [
+          13.2,
+          13.6
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Remove brief initial readiness and final settling; retain both placements and drawer movement.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "desk-middle",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "B",
+      "target": "Store in the middle drawer",
+      "view": "third-person",
+      "source": "assets/videos/desk-middle.mp4",
+      "source_base": "dist",
+      "source_sha256": "10aa7b9604fd5e73b7d341e7fa4e5a0441ff405ff44e6b56b2016e2b4fe3df53",
+      "goal_image": "assets/goals/desk-middle.webp",
+      "goal_sha256": "3149095148fc6b341c16c4608ddcd171c6e92d89017e493940c39625b971db9b",
+      "output": "assets/videos/edited/desk-middle.mp4",
+      "output_sha256": "29de36d8416b4c1d79fad802cc20d513e7b7664c6ce31cf7d3096c55d880fd14",
+      "poster": "assets/posters/edited/desk-middle.webp",
+      "source_duration_seconds": 12.84,
+      "output_duration_seconds": 14.0,
+      "source_interval_seconds": [
+        0.4,
+        12.8
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.4
+        ],
+        [
+          12.8,
+          12.84
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Already tightly edited; remove only brief initial readiness and retain nearly entire ending.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "toy-reference",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "A",
+      "target": "Cars in blue. Plush toys in white.",
+      "view": "third-person",
+      "source": "assets/videos/toy-reference.mp4",
+      "source_base": "dist",
+      "source_sha256": "9eaada6ada0a00db0a9e88817bae1acc2937df7c6ee73b503c86e57d4bd4ddbd",
+      "goal_image": "assets/goals/toy-reference.webp",
+      "goal_sha256": "31dd000721df0934df8d140b220dbc8e247cb1e00bfeab774f5ac8ffffe94388",
+      "output": "assets/videos/edited/toy-reference.mp4",
+      "output_sha256": "3bfb6f7b70fd0c26ddacf0b0702288b9e210ad8699d143f72913b9db13301517",
+      "poster": "assets/posters/edited/toy-reference.webp",
+      "source_duration_seconds": 46.12,
+      "output_duration_seconds": 22.4,
+      "source_interval_seconds": [
+        0.5,
+        21.3
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.5
+        ],
+        [
+          21.3,
+          46.12
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "End at completion of the toy-sorting stage; subsequent book handling belongs in separate book-order comparison.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "toy-reference-books",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "A",
+      "target": "Green-covered book on top",
+      "view": "third-person",
+      "source": "assets/videos/toy-reference.mp4",
+      "source_base": "dist",
+      "source_sha256": "9eaada6ada0a00db0a9e88817bae1acc2937df7c6ee73b503c86e57d4bd4ddbd",
+      "goal_image": "assets/goals/toy-reference.webp",
+      "goal_sha256": "31dd000721df0934df8d140b220dbc8e247cb1e00bfeab774f5ac8ffffe94388",
+      "output": "assets/videos/edited/toy-reference-books.mp4",
+      "output_sha256": "a6a2f2dd4a124f61db2053c416f7edb1e3d4f5e59b52fd4bdbe5e06fb2474efe",
+      "poster": "assets/posters/edited/toy-reference-books.webp",
+      "source_duration_seconds": 46.12,
+      "output_duration_seconds": 25.32,
+      "source_interval_seconds": [
+        21.4,
+        45.1
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          21.4
+        ],
+        [
+          45.1,
+          46.12
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Start at transition from toy sorting to books, end after release and before body turn.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "toy-swap",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "B",
+      "target": "Swap the toy destinations",
+      "view": "third-person",
+      "source": "assets/videos/toy-swap.mp4",
+      "source_base": "dist",
+      "source_sha256": "b8fb37f8e86b469c26d17a7161dc21308746b2113871d9c9f0befa09b833c8a6",
+      "goal_image": "assets/goals/toy-swap.webp",
+      "goal_sha256": "4ec7be677453f425564e8a54c8661da475aa0110b788439d8cd6ade7293c93fb",
+      "output": "assets/videos/edited/toy-swap.mp4",
+      "output_sha256": "bf741704d702fd8f7379e4d987bc85874003d12dd9726be5ddd6536d0ce1ff64",
+      "poster": "assets/posters/edited/toy-swap.webp",
+      "source_duration_seconds": 48.4,
+      "output_duration_seconds": 26.0,
+      "source_interval_seconds": [
+        0.4,
+        24.8
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.4
+        ],
+        [
+          24.8,
+          48.4
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "End after the last toy placement and hand withdrawal, before unrelated book stage.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "desk-holders-a",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "A",
+      "target": "Choose the stationery holders",
+      "view": "third-person",
+      "source": "assets/videos/desk-holders-a.mp4",
+      "source_base": "dist",
+      "source_sha256": "a8958ebba81a4573d69f0a70b3e793182a0ec06f1316a7c3f552e5dc5feaee1f",
+      "goal_image": "assets/goals/desk-holders-a.webp",
+      "goal_sha256": "5e8d19fa24ca4f719e7432771ffbbe8edfbb64a940cde738df48efb6030de73c",
+      "output": "assets/videos/edited/desk-holders-a.mp4",
+      "output_sha256": "23461ef09998b3f676ba92a13cb7bebb43c0e17fed82896a6a94e203935c0557",
+      "poster": "assets/posters/edited/desk-holders-a.webp",
+      "source_duration_seconds": 17.76,
+      "output_duration_seconds": 18.4,
+      "source_interval_seconds": [
+        0.8,
+        17.6
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.8
+        ],
+        [
+          17.6,
+          17.76
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Retain all transfers; trim readiness and a small final settle.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "desk-holders-b",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "B",
+      "target": "Swap the stationery holders",
+      "view": "third-person",
+      "source": "assets/videos/desk-holders-b.mp4",
+      "source_base": "dist",
+      "source_sha256": "5580210a8403e1b696347c3db6612ba70c82bc1a410939679b1dc3046f6e557f",
+      "goal_image": "assets/goals/desk-holders-b.webp",
+      "goal_sha256": "4b1b62dc8bf9c4cb32bc2a8229cbc0e8c96a45b03c0a4c3d5bca135df18d4866",
+      "output": "assets/videos/edited/desk-holders-b.mp4",
+      "output_sha256": "0b012649f135c93018f67510fd7a25a8f65e88ffbca5912ede2fabc1f9e96b72",
+      "poster": "assets/posters/edited/desk-holders-b.webp",
+      "source_duration_seconds": 13.24,
+      "output_duration_seconds": 14.24,
+      "source_interval_seconds": [
+        0.6,
+        13.24
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.6
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Trim readiness only; ending already close to completion and should not be cut earlier.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "toy-books",
+      "revision": 2,
+      "goal_type": "Visual goal image",
+      "goal_letter": "B",
+      "target": "Purple-covered book on top",
+      "view": "third-person",
+      "source": "assets/videos/toy-books.mp4",
+      "source_base": "dist",
+      "source_sha256": "132dc5f4137230276c53ffbdbd9c37d6d2dda10adc42d7123b4623178051fd9d",
+      "goal_image": "assets/goals/toy-books.webp",
+      "goal_sha256": "ba8d2f4edae4942856e10019fad33f14f4ba2509c2b391300538234d2083e19d",
+      "output": "assets/videos/edited/toy-books.mp4",
+      "output_sha256": "3fe66458cb38e62788495e3a53b5baa688561b4cb744a513f22f2cdd9a10f7b6",
+      "poster": "assets/posters/edited/toy-books.webp",
+      "source_duration_seconds": 44.4,
+      "output_duration_seconds": 20.0,
+      "source_interval_seconds": [
+        25.2,
+        43.6
+      ],
+      "playback_speed_relative_to_source": 1,
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          25.2
+        ],
+        [
+          43.6,
+          44.4
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Show the complete book-order stage only, ending after release and clear result.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-books-right",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "A",
+      "target": "Brown notebook on the right",
+      "view": "third-person",
+      "source": "assets/videos/human-books-right.mp4",
+      "source_base": "dist",
+      "source_sha256": "9b223dc7a2a6043ecc1c37c29084a0b91d799c5ec6dfbb16351c01fb59185786",
+      "goal_image": "assets/goals/human-books-right.webp",
+      "goal_sha256": "14d295d7acaf5c2b2ecae88c06f0f9612760104d5bacb4261eadf690db01a3d8",
+      "output": "assets/videos/edited/human-books-right.mp4",
+      "output_sha256": "d0cbd6bceb4c95498fc3745057e84dacd6ef91581b862c7c481dd4bb93459d23",
+      "poster": "assets/posters/edited/human-books-right.webp",
+      "source_duration_seconds": 24.56,
+      "output_duration_seconds": 10.0,
+      "source_interval_seconds": [
+        0.6,
+        9.0
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "human-books-right",
+      "pair_duration_seconds": 10.0,
+      "alignment_basis": "Approach, brown-notebook lift, right-slot insertion, hand withdrawal.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.6
+        ],
+        [
+          9.0,
+          24.56
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Approach, brown-notebook lift, right-slot insertion, hand withdrawal. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-books-left",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "B",
+      "target": "Brown notebook on the left",
+      "view": "third-person",
+      "source": "assets/videos/human-books-left.mp4",
+      "source_base": "dist",
+      "source_sha256": "ba21f1a1331cbbdfb2295240c7cabe24408d43962308ac37626201229bb93f79",
+      "goal_image": "assets/goals/human-books-left.webp",
+      "goal_sha256": "01ebc2a3e7bdb87e0c30bf586d592edc958cce80bd9f189e87c09f763c7aee74",
+      "output": "assets/videos/edited/human-books-left.mp4",
+      "output_sha256": "25c60a22c9eedc9a8d7b1ee0a236bf295a908f51c75c2e5c9228cd5f8faa0dc7",
+      "poster": "assets/posters/edited/human-books-left.webp",
+      "source_duration_seconds": 26.56,
+      "output_duration_seconds": 10.0,
+      "source_interval_seconds": [
+        0.6,
+        9.0
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "human-books-left",
+      "pair_duration_seconds": 10.0,
+      "alignment_basis": "Approach, brown-notebook lift, left-slot insertion, hand withdrawal.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.6
+        ],
+        [
+          9.0,
+          26.56
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Approach, brown-notebook lift, left-slot insertion, hand withdrawal. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-mug-monitor",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "A",
+      "target": "Mug near the monitor",
+      "view": "third-person",
+      "source": "assets/videos/human-mug-monitor.mp4",
+      "source_base": "dist",
+      "source_sha256": "f3fc45a9c73ae52410c0983aed1d8cec38b224e6a7eed796c6935a8fe786e441",
+      "goal_image": "assets/goals/human-mug-monitor.webp",
+      "goal_sha256": "18401d1fbc0eb9f30767be122ec7bd7a9b8c353a4fd7ed302e0b27b7458d597a",
+      "output": "assets/videos/edited/human-mug-monitor.mp4",
+      "output_sha256": "1eeac748ba1230feb9f9cb7ffe4776789627dfd7fbf1638234fdaea32f04f602",
+      "poster": "assets/posters/edited/human-mug-monitor.webp",
+      "source_duration_seconds": 12.56,
+      "output_duration_seconds": 12.8,
+      "source_interval_seconds": [
+        1.0,
+        12.2
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "human-mug-monitor",
+      "pair_duration_seconds": 12.799999999999999,
+      "alignment_basis": "Lid grasp, lid placed on mug, mug transport, placement near monitor.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          1.0
+        ],
+        [
+          12.2,
+          12.56
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Lid grasp, lid placed on mug, mug transport, placement near monitor. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-mug-rack",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "B",
+      "target": "Mug near the file rack",
+      "view": "third-person",
+      "source": "assets/videos/human-mug-rack.mp4",
+      "source_base": "dist",
+      "source_sha256": "73858ac17bbacc71ac6fdfd47c32cc0ef296e6b0d9131e00fea5e26cf04d9c7e",
+      "goal_image": "assets/goals/human-mug-rack.webp",
+      "goal_sha256": "0adfb67e05879e8c10c2fff8d69f51b0aaf89479213e6dae91d5af12675ad402",
+      "output": "assets/videos/edited/human-mug-rack.mp4",
+      "output_sha256": "26df427614515b4a1f41bd2956e7cb48ba6cf3bf6ea858d791072d15492baaf2",
+      "poster": "assets/posters/edited/human-mug-rack.webp",
+      "source_duration_seconds": 11.56,
+      "output_duration_seconds": 11.8,
+      "source_interval_seconds": [
+        1.0,
+        11.2
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "human-mug-rack",
+      "pair_duration_seconds": 11.799999999999999,
+      "alignment_basis": "Lid grasp, lid placed on mug, mug transport, placement near rack.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          1.0
+        ],
+        [
+          11.2,
+          11.56
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Lid grasp, lid placed on mug, mug transport, placement near rack. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "goal-position-a",
+      "revision": 3,
+      "goal_type": "Visual goal image",
+      "goal_letter": "A",
+      "target": "Bottle in front of the green block",
+      "view": "third-person",
+      "source": "assets/videos/goal-position-a.mp4",
+      "source_base": "dist",
+      "source_sha256": "1e19424c6e8ed16f40f7ac2cfcb5ef869618d8e6e15e5461c5d38dfbd8a617f3",
+      "goal_image": "assets/goals/goal-position-a.webp",
+      "goal_sha256": "49fa82b4f82f3548fb6b75bb0582afad24022607bc109f1267a313452f67e0ed",
+      "output": "assets/videos/edited/goal-position-a.mp4",
+      "output_sha256": "1ee5a4b4b00ca1f4350d5ee9ac1c1903f69fffdece710db99888b1b57e731235",
+      "poster": "assets/posters/edited/goal-position-a.webp",
+      "source_duration_seconds": 22.0,
+      "output_duration_seconds": 11.0,
+      "source_interval_seconds": [
+        3.8,
+        21.2
+      ],
+      "playback_speed_relative_to_source": 1.8510638297872337,
+      "action_aligned_pair": "goal-position-a",
+      "pair_duration_seconds": 11.0,
+      "alignment_basis": "Bottle grasp, lift, transport toward green block, release and withdrawal.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          3.8
+        ],
+        [
+          21.2,
+          22.0
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Bottle grasp, lift, transport toward green block, release and withdrawal. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "goal-position-b",
+      "revision": 3,
+      "goal_type": "Visual goal image",
+      "goal_letter": "B",
+      "target": "Bottle on the purple block",
+      "view": "third-person",
+      "source": "assets/videos/goal-position-b.mp4",
+      "source_base": "dist",
+      "source_sha256": "98bc9a9856b86f553c9c978926f74cd05e6a936ad267363146677dbd75def4ad",
+      "goal_image": "assets/goals/goal-position-b.webp",
+      "goal_sha256": "bf9425eaa1d260a088031332378161f99f4958dff176cafac06daa5adf2b7c66",
+      "output": "assets/videos/edited/goal-position-b.mp4",
+      "output_sha256": "bd09ba259160fa8d18cd3cd22a0c7d9d51a404db9bbb7c64dde6c32981ae3c8b",
+      "poster": "assets/posters/edited/goal-position-b.webp",
+      "source_duration_seconds": 15.72,
+      "output_duration_seconds": 8.0,
+      "source_interval_seconds": [
+        0.0,
+        13.6
+      ],
+      "playback_speed_relative_to_source": 2.0,
+      "action_aligned_pair": "goal-position-b",
+      "pair_duration_seconds": 8.0,
+      "alignment_basis": "Bottle grasp, lift, transport above purple block. Ends before unstable release.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          13.6,
+          15.72
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Bottle grasp, lift, transport above purple block. Ends before unstable release. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-books-right-ego",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "A",
+      "target": "Brown notebook on the right",
+      "view": "first-person",
+      "source": "videos/ICL/\u4eba\u624bgoal image/case1/case9 (1).mp4",
+      "source_base": "paper_directory",
+      "source_sha256": "62adca8bac1b1d77ae512d2cf46c2dde1829342978109844b599eace221e96d2",
+      "goal_image": "assets/goals/human-books-right.webp",
+      "goal_sha256": "14d295d7acaf5c2b2ecae88c06f0f9612760104d5bacb4261eadf690db01a3d8",
+      "output": "assets/videos/edited/human-books-right-ego.mp4",
+      "output_sha256": "1af85bafc6d78753dde5b92fbd14664087759191202d3a5a0a40098ef2a9ffcd",
+      "poster": "assets/posters/edited/human-books-right-ego.webp",
+      "source_duration_seconds": 24.466667,
+      "output_duration_seconds": 10.0,
+      "source_interval_seconds": [
+        0.6,
+        9.0
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "human-books-right",
+      "pair_duration_seconds": 10.0,
+      "alignment_basis": "Approach, brown-notebook lift, right-slot insertion, hand withdrawal.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.6
+        ],
+        [
+          9.0,
+          24.466667
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Approach, brown-notebook lift, right-slot insertion, hand withdrawal. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-books-left-ego",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "B",
+      "target": "Brown notebook on the left",
+      "view": "first-person",
+      "source": "videos/ICL/\u4eba\u624bgoal image/case2/case10 (1).mp4",
+      "source_base": "paper_directory",
+      "source_sha256": "ed284dde19cfdac75cafaee28fc10d7e7b085e34a4abae16715a329ddfafe5bd",
+      "goal_image": "assets/goals/human-books-left.webp",
+      "goal_sha256": "01ebc2a3e7bdb87e0c30bf586d592edc958cce80bd9f189e87c09f763c7aee74",
+      "output": "assets/videos/edited/human-books-left-ego.mp4",
+      "output_sha256": "d7ebd160db62380fc33e18cb1fe6cdfdf45a464cbc63e40cebbd22ff1c84d978",
+      "poster": "assets/posters/edited/human-books-left-ego.webp",
+      "source_duration_seconds": 27.0,
+      "output_duration_seconds": 10.0,
+      "source_interval_seconds": [
+        0.6,
+        9.0
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "human-books-left",
+      "pair_duration_seconds": 10.0,
+      "alignment_basis": "Approach, brown-notebook lift, left-slot insertion, hand withdrawal.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.6
+        ],
+        [
+          9.0,
+          27.0
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Approach, brown-notebook lift, left-slot insertion, hand withdrawal. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-mug-monitor-ego",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "A",
+      "target": "Mug near the monitor",
+      "view": "first-person",
+      "source": "videos/ICL/\u4eba\u624bgoal image/case3/case3 (1).mp4",
+      "source_base": "paper_directory",
+      "source_sha256": "ca0e4cd8d5f620784e493d0a889aa66a485360b5e2e8ba436b9510bb5994bbc5",
+      "goal_image": "assets/goals/human-mug-monitor.webp",
+      "goal_sha256": "18401d1fbc0eb9f30767be122ec7bd7a9b8c353a4fd7ed302e0b27b7458d597a",
+      "output": "assets/videos/edited/human-mug-monitor-ego.mp4",
+      "output_sha256": "ec9abb35ffd108e28f21816a766096eedd30f6020760dbf0bc19768ab7d707b9",
+      "poster": "assets/posters/edited/human-mug-monitor-ego.webp",
+      "source_duration_seconds": 12.9,
+      "output_duration_seconds": 12.8,
+      "source_interval_seconds": [
+        0.4,
+        12.7
+      ],
+      "playback_speed_relative_to_source": 1.0982142857142856,
+      "action_aligned_pair": "human-mug-monitor",
+      "pair_duration_seconds": 12.799999999999999,
+      "alignment_basis": "Lid grasp, lid placed on mug, mug transport, placement near monitor.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          0,
+          0.4
+        ],
+        [
+          12.7,
+          12.9
+        ]
+      ],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Lid grasp, lid placed on mug, mug transport, placement near monitor. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "human-mug-rack-ego",
+      "revision": 3,
+      "goal_type": "Human goal image",
+      "goal_letter": "B",
+      "target": "Mug near the file rack",
+      "view": "first-person",
+      "source": "videos/ICL/\u4eba\u624bgoal image/case4/Case4 (1).mp4",
+      "source_base": "paper_directory",
+      "source_sha256": "413b6dfd93eb8be38f938042a30fa6fbf331bbb87afd265e70e800c69f88c035",
+      "goal_image": "assets/goals/human-mug-rack.webp",
+      "goal_sha256": "0adfb67e05879e8c10c2fff8d69f51b0aaf89479213e6dae91d5af12675ad402",
+      "output": "assets/videos/edited/human-mug-rack-ego.mp4",
+      "output_sha256": "90306eb67bca2e3fa3fc568da603f52ae4dbb7541e7e1b958e2c96299868ffb2",
+      "poster": "assets/posters/edited/human-mug-rack-ego.webp",
+      "source_duration_seconds": 12.3,
+      "output_duration_seconds": 11.8,
+      "source_interval_seconds": [
+        0.0,
+        12.3
+      ],
+      "playback_speed_relative_to_source": 1.2058823529411766,
+      "action_aligned_pair": "human-mug-rack",
+      "pair_duration_seconds": 11.799999999999999,
+      "alignment_basis": "Lid grasp, lid placed on mug, mug transport, placement near rack.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [],
+      "source_crop": null,
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Lid grasp, lid placed on mug, mug transport, placement near rack. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "goal-position-a-ego",
+      "revision": 3,
+      "goal_type": "Visual goal image",
+      "goal_letter": "A",
+      "target": "Bottle in front of the green block",
+      "view": "first-person",
+      "source": "videos/zero-shot/\u5b9a\u4f4d/10\u670831\u65e5 (5)(1).mp4",
+      "source_base": "paper_directory",
+      "source_sha256": "9aa0d30567af572d07b9d7978aa0f031c4051d9c45bc4e2823edd276dfae274d",
+      "goal_image": "assets/goals/goal-position-a.webp",
+      "goal_sha256": "49fa82b4f82f3548fb6b75bb0582afad24022607bc109f1267a313452f67e0ed",
+      "output": "assets/videos/edited/goal-position-a-ego.mp4",
+      "output_sha256": "bc05a0f18057273a68e211db23eb830bca381e091b1f0e2ea305f45f25ee1a63",
+      "poster": "assets/posters/edited/goal-position-a-ego.webp",
+      "source_duration_seconds": 10.356009,
+      "output_duration_seconds": 11.0,
+      "source_interval_seconds": [
+        0.0,
+        9.4
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "goal-position-a",
+      "pair_duration_seconds": 11.0,
+      "alignment_basis": "Bottle grasp, lift, transport toward green block, release and withdrawal.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0.4,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          9.4,
+          10.356009
+        ]
+      ],
+      "source_crop": "crop=640:360:640:0",
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Bottle grasp, lift, transport toward green block, release and withdrawal. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    },
+    {
+      "id": "goal-position-b-ego",
+      "revision": 3,
+      "goal_type": "Visual goal image",
+      "goal_letter": "B",
+      "target": "Bottle on the purple block",
+      "view": "first-person",
+      "source": "videos/zero-shot/\u5b9a\u4f4d2/10\u670831\u65e5 (5).mp4",
+      "source_base": "paper_directory",
+      "source_sha256": "6c2a2f0ccc8a85b27a533f6d0f1d0959fe7c49601fb7c81005668780584929ef",
+      "goal_image": "assets/goals/goal-position-b.webp",
+      "goal_sha256": "bf9425eaa1d260a088031332378161f99f4958dff176cafac06daa5adf2b7c66",
+      "output": "assets/videos/edited/goal-position-b-ego.mp4",
+      "output_sha256": "5dd535fea8868c3c73b0830119163ba28eca4becd64689113f4be1d809ccc184",
+      "poster": "assets/posters/edited/goal-position-b-ego.webp",
+      "source_duration_seconds": 8.15,
+      "output_duration_seconds": 8.0,
+      "source_interval_seconds": [
+        0.0,
+        6.8
+      ],
+      "playback_speed_relative_to_source": 1.0,
+      "action_aligned_pair": "goal-position-b",
+      "pair_duration_seconds": 8.0,
+      "alignment_basis": "Bottle grasp, lift, transport above purple block. Ends before unstable release.",
+      "alignment_note": "Corresponding action intervals; approximate action alignment, not shared camera timestamps.",
+      "intro_duration_seconds": 1.2,
+      "final_frame_hold_seconds": 0,
+      "execution_output_start_seconds": 1.2,
+      "removed_source_intervals": [
+        [
+          6.8,
+          8.15
+        ]
+      ],
+      "source_crop": "crop=640:360:640:0",
+      "goal_crop": null,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "fps": 25,
+      "audio": "No audio in derivative; web source is muted",
+      "notes": "Bottle grasp, lift, transport above purple block. Ends before unstable release. Both views use the same presentation duration; adjusted playback speed is shown in the video.",
+      "full_source_recording_retained": true
+    }
+  ],
+  "overview": {
+    "output": "assets/videos/edited/overview.mp4",
+    "poster": "assets/posters/edited/overview.webp",
+    "duration_seconds": 24.0,
+    "dimensions": [
+      1280,
+      720
+    ],
+    "fps": 25,
+    "playback_speed_relative_to_sources": 1,
+    "notes": "Selected six-second excerpts joined by cuts. No action crop, time warp, or generated goal image.",
+    "segments": [
+      {
+        "source": "assets/videos/zero-bottles.mp4",
+        "source_sha256": "16ef83e32bb89eb3f6b66ccd805e63ff7d06ba46e8f3930d2835db5ace970967",
+        "source_interval_seconds": [
+          4,
+          10
+        ],
+        "output_interval_seconds": [
+          0,
+          6
+        ],
+        "label": "Zero-shot manipulation"
+      },
+      {
+        "source": "assets/videos/edited/human-books-right.mp4",
+        "source_sha256": "d0cbd6bceb4c95498fc3745057e84dacd6ef91581b862c7c481dd4bb93459d23",
+        "source_interval_seconds": [
+          3.0,
+          9.0
+        ],
+        "output_interval_seconds": [
+          6,
+          12
+        ],
+        "label": "Human goal images"
+      },
+      {
+        "source": "assets/videos/edited/desk-middle.mp4",
+        "source_sha256": "29de36d8416b4c1d79fad802cc20d513e7b7664c6ce31cf7d3096c55d880fd14",
+        "source_interval_seconds": [
+          1.8,
+          7.8
+        ],
+        "output_interval_seconds": [
+          12,
+          18
+        ],
+        "label": "Goal-guided organization"
+      },
+      {
+        "source": "assets/videos/long-desk.mp4",
+        "source_sha256": "f4ae2425c8fde4ae5b54b576b9a39b293fe686c802d7a90fb1738c59093dcb24",
+        "source_interval_seconds": [
+          18,
+          24
+        ],
+        "output_interval_seconds": [
+          18,
+          24
+        ],
+        "label": "Long-horizon execution"
+      }
+    ]
+  }
+}

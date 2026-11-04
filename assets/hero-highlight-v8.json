@@ -1,0 +1,29 @@
+{
+  "id": "goal-highlight-v8",
+  "generator": "scripts/prepare_hero_highlight_v8.py",
+  "source": "assets/videos/human-books-right.mp4",
+  "source_sha256": "9b223dc7a2a6043ecc1c37c29084a0b91d799c5ec6dfbb16351c01fb59185786",
+  "goal_image": "assets/goals/human-books-right.webp",
+  "goal_sha256": "14d295d7acaf5c2b2ecae88c06f0f9612760104d5bacb4261eadf690db01a3d8",
+  "source_interval_seconds": [
+    1.0,
+    9.0
+  ],
+  "output_duration_seconds": 8.0,
+  "playback_speed_relative_to_source": 1,
+  "output": "assets/videos/presentation/goal-highlight-v8.mp4",
+  "poster": "assets/posters/presentation/goal-highlight-v8.webp",
+  "output_sha256": "fc4bfb853fbbce3cc54ae75ed4c0b9569b61a7548454e27f8e875befc1784f4a",
+  "dimensions": [
+    960,
+    540
+  ],
+  "fps": 25,
+  "frames": 200,
+  "source_crop": null,
+  "end_hold_seconds": 0,
+  "training_setting": "After robot-task post-training",
+  "target": "Brown notebook in the right slot of the file rack",
+  "caption": "Human goal \u2192 robot placement \u00b7 8 s excerpt \u00b7 Original source speed",
+  "notes": "Lift, right-slot insertion and hand withdrawal are visible. The excerpt ends before subsequent white-notebook handling; it does not represent the full three-notebook task. The webpage pairs this execution with the unchanged, supplied human goal image."
+}
