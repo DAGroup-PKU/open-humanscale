@@ -57,3 +57,10 @@ python3 tools/prepare_zero_shot_goals.py --source /path/to/paper/videos/zero-sho
 ```
 
 The gallery regeneration tool preserves separately added recordings and goal mappings. New long-horizon media provenance is in `assets/additional-demos-v24.json`.
+
+## Follow-up: research introduction and household camera correction
+
+- Expanded the HumanWAM-Vanilla introduction into three consecutive parts: study protocol and architecture, data scaling with both attention configurations, and task/scene diversity. Figures are full-page 3,200-pixel renders from the latest `Ego_Centric_Data_Beats_Real_Robot_Pretraining_in_Embodied_Brain_Scaling 3/figs`; provenance is in `assets/figures/ego-study-v25/sources.json`. Robot-data efficiency remains available in a disclosure.
+- Replaced the household third-person recording with `videos/长程任务/long1.mp4`. Its browser copy retains 3840 × 2160 resolution, using H.264/AAC and faststart. The project film is unchanged.
+- Long-horizon pairs share playback, pause, restart and seeking controls. The shorter recording defines the common loop boundary; playback drift is corrected while playing. Household action landmarks match at equal source timestamps; the ego recording has an extra trailing segment.
+- The final browser review was stopped at the user's request to publish immediately.

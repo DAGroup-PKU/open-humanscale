@@ -1,4 +1,55 @@
 /* A shorter opening and direct, full-frame research demonstrations. */
+.ego-story { margin-top: 44px; }
+.ego-chapter { padding-block: 38px 48px; border-top: 1px solid var(--line); }
+.ego-chapter-heading { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 36px; }
+.ego-chapter-number { color: var(--blue); background: var(--blue-soft); border-radius: 8px; padding: 8px 12px; font-size: 14px; font-weight: 600; flex: none; margin-top: 6px; }
+body .ego-chapter h3 { font-size: clamp(26px, 3vw, 38px); line-height: 1.2; }
+.ego-chapter-heading p { max-width: 780px; margin-top: 14px; font-size: 16px; line-height: 1.75; }
+.ego-story figure { margin: 0; min-width: 0; }
+.ego-story img { display: block; }
+.ego-protocol-layout { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(220px, 1fr); gap: 44px; align-items: center; }
+.ego-protocol-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 36px; }
+.ego-protocol-steps li > span { display: block; color: var(--blue); font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+body .ego-story h4 { font-size: 20px; line-height: 1.35; }
+.ego-protocol-steps p { margin-top: 8px; font-size: 15px; line-height: 1.7; }
+.ego-scaling-panels { display: grid; gap: 44px; }
+.ego-figure-heading { display: flex; justify-content: space-between; gap: 18px; align-items: baseline; margin-bottom: 24px; }
+.ego-figure-heading > span { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.ego-takeaway { margin-top: 28px; }
+.ego-takeaway strong { color: var(--ink); font-size: clamp(21px, 2vw, 28px); font-weight: 600; letter-spacing: -.02em; }
+.ego-takeaway p { font-size: 13px; color: var(--muted); margin-top: 9px; line-height: 1.7; }
+.ego-diversity-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); align-items: start; gap: 36px; }
+.ego-diversity-layout h4 { margin-bottom: 24px; }
+.ego-table-scroll { overflow-x: auto; }
+.ego-corpus-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.ego-corpus-table caption { caption-side: bottom; text-align: left; color: var(--muted); padding-top: 12px; line-height: 1.6; }
+.ego-corpus-table th, .ego-corpus-table td { padding: 9px 6px; text-align: right; white-space: nowrap; }
+.ego-corpus-table th:first-child { text-align: left; }
+.ego-corpus-table th { color: var(--ink); font-weight: 500; }
+.ego-corpus-table thead, .ego-corpus-table tbody { border-bottom: 1px solid var(--line); }
+.ego-corpus-table thead { border-top: 1px solid var(--line); }
+.ego-table-note { font-size: 12px; line-height: 1.7; margin-top: 12px; }
+.ego-efficiency figure { padding-block: 16px 24px; }
+@media (max-width: 1000px) {
+  .ego-protocol-layout, .ego-diversity-layout { grid-template-columns: 1fr; gap: 28px; }
+  .ego-protocol-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .ego-corpus-table { font-size: 14px; }
+}
+@media (max-width: 600px) {
+  .ego-story { margin-top: 28px; }
+  .ego-chapter { padding-block: 28px 34px; }
+  .ego-chapter-heading { gap: 12px; margin-bottom: 28px; }
+  .ego-chapter-number { font-size: 12px; padding: 6px 9px; }
+  .ego-chapter-heading p { font-size: 14px; }
+  .ego-protocol-steps { grid-template-columns: 1fr; gap: 20px; }
+  .ego-protocol-steps li { display: grid; grid-template-columns: 28px 1fr; gap: 4px 8px; }
+  .ego-protocol-steps li > span { grid-row: span 2; padding-top: 4px; }
+  .ego-protocol-steps p { grid-column: 2; margin: 0; font-size: 13px; }
+  body .ego-story h4 { font-size: 18px; }
+  .ego-figure-heading { flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .ego-corpus-table { font-size: 11px; }
+  .ego-corpus-table th, .ego-corpus-table td { padding: 8px 5px; }
+}
 body .hero { padding-top: 42px; padding-bottom: 28px; }
 body .hero h1 { font-size: clamp(52px, 6.6vw, 88px); }
 body .hero h1 .paper-subtitle { font-size: clamp(28px, 3vw, 40px); margin-top: 24px; max-width: 1160px; line-height: 1.25; }
@@ -111,3 +162,7 @@ body.intro-open { overflow: hidden; }
   body .goal-input-copy h4 { font-size: 17px; }
   .intro-toolbar { padding: 8px 14px; }
 }
+
+.long-timeline { display: flex; align-items: center; gap: 16px; margin: 16px 0 20px; }
+.long-timeline input { flex: 1; min-width: 0; accent-color: var(--blue); cursor: pointer; }
+.long-timeline output { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }

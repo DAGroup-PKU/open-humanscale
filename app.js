@@ -119,24 +119,23 @@ function renderGoalExperiments(type){
  }).join('');
  groups.forEach(key=>renderGoals(type,key,`${type}-${key}-gallery`));
 }
+let longPlayback = null;
 const longTasks={
- household:{views:[['long-household-ego-v24','First-person'],['long-household-third-v24','Third-person']],title:'From tabletop to household.',description:'Toy sorting, book stacking, bottle disposal, and garment collection across several work areas.',steps:['Toys & books','Bottle disposal','Garments','Back to the desk']},
+ household:{views:[['long-household-ego-v24','First-person'],['long-household-third-v25','Third-person']],title:'From tabletop to household.',description:'Toy sorting, book stacking, bottle disposal, and garment collection across several work areas.',steps:['Toys & books','Bottle disposal','Garments','Back to the desk']},
  desk:{views:[['long-desk-ego','First-person'],['long-desk','Third-person']],title:'A desk, progressively organized.',description:'Mug placement, stationery collection, drawer storage, and notebook arrangement in one recorded sequence.',steps:['Cup','Stationery','Drawers','Books']}
 };
 function renderLong(key){
  const d=longTasks[key],stage=document.getElementById('long-stage');
+ longPlayback?.destroy();
  pausedGoalGroups.delete(stage);updateGoalPause(stage);
- replaceGallery('long-stage',d.views.map(([name,label])=>`<figure class="long-camera"><figcaption>${label}</figcaption><div class="video-wrap">${video(name,`${d.title} ${label}`).replace('controls muted','controls muted loop data-goal-loop').replace(name+'.webp',name+(name.endsWith('v24')?'.jpg':'.webp'))}</div></figure>`).join(''));
+ replaceGallery('long-stage',d.views.map(([name,label])=>`<figure class="long-camera"><figcaption>${label}</figcaption><div class="video-wrap">${video(name,`${d.title} ${label}`).replace('controls muted','muted data-goal-loop').replace(name+'.webp',name+(/v2[45]$/.test(name)?'.jpg':'.webp'))}</div></figure>`).join(''));
+ longPlayback=window.createSyncedPair(stage,paused=>{if(paused)pausedGoalGroups.add(stage);else pausedGoalGroups.delete(stage);updateGoalPause(stage);});
  document.getElementById('long-title').textContent=d.title;document.getElementById('long-description').textContent=d.description;
  document.getElementById('long-protocol').textContent='After task-specific post-training';
  document.getElementById('long-sequence').innerHTML=d.steps.map(t=>`<span>${t}</span>`).join('<i aria-hidden="true">→</i>');setPressed('long',key);
 }
 renderZero();renderGoals('pretrained','positioning');renderGoalExperiments('organization');renderGoalExperiments('human');
 
-const studies={
- scaling:{src:'assets/figures/ego-scaling-v20.png',alt:'Pure egocentric pretraining scaling from 100 to 50,000 hours; Scene-OOD and Random success improve after robot adaptation.',caption:'Evaluated after robot adaptation.',detail:'Pure ego pretraining → robot adaptation. Best checkpoint per setting; 50 clean demonstrations per task. Dashed curves are descriptive fits.'},
- efficiency:{src:'assets/figures/efficiency.webp',alt:'Robot demonstration efficiency after egocentric pretraining with varying robot demonstration budgets.',caption:'Robot demonstrations needed after adaptation.',detail:'Compare egocentric pretraining budgets across robot demonstrations per task; this is data efficiency, not compute efficiency.'}
-};
 function swapCameraVideo(container,name,edited=false){const old=container.querySelector('video');const time=old.currentTime;const playing=!old.paused&&!old.ended;const label=old.getAttribute('aria-label');pauseManagedVideo(old);old.outerHTML=video(name,label,edited);const next=container.querySelector('video');next.addEventListener('loadedmetadata',()=>{next.currentTime=Math.min(time,Math.max(0,next.duration-.05));if(playing)next.play().catch(()=>{});},{once:true});next.load();}
 const dialog=document.getElementById('figure-dialog');
 let figureTrigger=null;
@@ -152,10 +151,9 @@ document.addEventListener('click',e=>{
  const zeroFilter=e.target.closest('[data-zero-filter]');if(zeroFilter)renderZero(zeroFilter.dataset.zeroFilter);
  if(e.target.closest('[data-zero-prev]')&&zeroTaskIndex>0)showZeroTask(zeroTaskIndex-1);
  if(e.target.closest('[data-zero-next]')&&zeroTaskIndex<visibleZeroTasks.length-1)showZeroTask(zeroTaskIndex+1);
- const pauseButton=e.target.closest('[data-pause-pair]');if(pauseButton){const group=document.getElementById(pauseButton.dataset.pausePair);if(pausedGoalGroups.has(group)){pausedGoalGroups.delete(group);group.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}));}else{pausedGoalGroups.add(group);group.querySelectorAll('video').forEach(pauseManagedVideo);}updateGoalPause(group);}
- const pairButton=e.target.closest('[data-play-pair]');if(pairButton){const videos=[...document.getElementById(pairButton.dataset.playPair).querySelectorAll('video')].filter(v=>!v.closest('details:not([open])')); const group=document.getElementById(pairButton.dataset.playPair);pausedGoalGroups.delete(group);updateGoalPause(group);for(const v of videos)v.currentTime=0;Promise.allSettled(videos.map(v=>v.play())).then(results=>{if(!pairButton.isConnected||videos.some(v=>!v.isConnected))return;pairButton.textContent=results.some(r=>r.status==='rejected')?'Use the video play control':videos.length>1?'↻ Replay both from the start':'↻ Replay from the start';});}
+ const pauseButton=e.target.closest('[data-pause-pair]');if(pauseButton){const group=document.getElementById(pauseButton.dataset.pausePair);if(group.id==='long-stage'){longPlayback.toggle();return;}if(pausedGoalGroups.has(group)){pausedGoalGroups.delete(group);group.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}));}else{pausedGoalGroups.add(group);group.querySelectorAll('video').forEach(pauseManagedVideo);}updateGoalPause(group);}
+ const pairButton=e.target.closest('[data-play-pair]');if(pairButton){if(pairButton.dataset.playPair==='long-stage'){longPlayback.restart();return;}const videos=[...document.getElementById(pairButton.dataset.playPair).querySelectorAll('video')].filter(v=>!v.closest('details:not([open])')); const group=document.getElementById(pairButton.dataset.playPair);pausedGoalGroups.delete(group);updateGoalPause(group);for(const v of videos)v.currentTime=0;Promise.allSettled(videos.map(v=>v.play())).then(results=>{if(!pairButton.isConnected||videos.some(v=>!v.isConnected))return;pairButton.textContent=results.some(r=>r.status==='rejected')?'Use the video play control':videos.length>1?'↻ Replay both from the start':'↻ Replay from the start';});}
  const task=e.target.closest('[data-long]');if(task)renderLong(task.dataset.long);
- const study=e.target.closest('[data-study]');if(study){const d=studies[study.dataset.study];document.getElementById('study-image').src=d.src;document.getElementById('study-image').alt=d.alt;document.getElementById('study-caption').textContent=d.caption;const b=document.getElementById('study-enlarge');b.dataset.figure=d.src;b.dataset.caption=d.detail;setPressed('study',study.dataset.study);}
  const figure=e.target.closest('[data-figure]');if(figure){figureTrigger=figure;const img=document.getElementById('dialog-image');img.src=figure.dataset.figure;img.alt=figure.dataset.caption;dialog.classList.toggle('is-goal-figure',!!figure.dataset.goalAnnotation||figure.hasAttribute('data-goal-figure'));document.getElementById('dialog-goal-marks').innerHTML=figure.dataset.goalAnnotation?goalMarks(figure.dataset.goalAnnotation):'';document.getElementById('dialog-caption').textContent=figure.dataset.caption;dialog.showModal();document.body.classList.add('dialog-open');document.querySelectorAll('video').forEach(pauseManagedVideo);}
 });
 function closeFigure(){dialog.close();}
@@ -183,10 +181,12 @@ function updateGoalPlayback(){
  activeGoalGroup=enabled?(groups.includes(activeGoalGroup)?activeGoalGroup:groups[0]||null):null;
  document.querySelectorAll('video[data-goal-loop]').forEach(v=>{
   const group=v.closest('.goal-comparison');
+  if(group.id==='long-stage')return;
   if(enabled&&group===activeGoalGroup&&visibleGoalVideos.has(v)&&!pausedGoalGroups.has(group)){
    if(v.paused)v.play().catch(()=>{});
   }else pauseManagedVideo(v);
  });
+ longPlayback?.setActive(enabled&&activeGoalGroup?.id==='long-stage');
 }
 const goalObserver=new IntersectionObserver(entries=>{
  entries.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.25)visibleGoalVideos.add(e.target);else visibleGoalVideos.delete(e.target);});
@@ -196,6 +196,7 @@ function watchGoalVideos(){
  document.querySelectorAll('video[data-goal-loop]').forEach(v=>{
   if(observedGoalVideos.has(v))return;
   observedGoalVideos.add(v);goalObserver.observe(v);
+  if(v.closest('#long-stage'))return;
   v.addEventListener('pause',()=>{
    if(managedGoalPauses.delete(v)||!v.isConnected)return;
    const group=v.closest('.goal-comparison');pausedGoalGroups.add(group);updateGoalPause(group);
