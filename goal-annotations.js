@@ -4,13 +4,13 @@ const goalAnnotations = {
   'goal-position-a': [{ rect: [49.4, 48.7, 7.8, 32.2], label: 'In front of green' }],
   'goal-position-b': [{ rect: [38.6, 34.5, 9.2, 34.9], label: 'On purple' }],
   'desk-upper': [{ rect: [28.9, 30.2, 25.3, 25.8], label: 'Upper drawer' }],
-  'desk-middle': [{ rect: [33.2, 25.3, 23.5, 26.1], label: 'Middle drawer' }],
+  'desk-middle': [{ rect: [33.2, 25.3, 23.5, 26.1], label: 'Middle drawer', placement: 'side' }],
   'toy-reference': [
     { rect: [22.8, 17.8, 26.3, 33.5], label: 'Cars in blue' },
     { rect: [48.4, 16, 25.7, 33.2], label: 'Plush in white' }
   ],
   'toy-swap': [
-    { rect: [24.1, 12.1, 25.5, 36.1], label: 'Plush in blue' },
+    { rect: [24.1, 12.1, 25.5, 36.1], label: 'Plush in blue', placement: 'below' },
     { rect: [48.9, 15.9, 25.6, 32.4], label: 'Cars in white' }
   ],
   'desk-holders-a': [

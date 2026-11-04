@@ -64,7 +64,6 @@
   host.innerHTML = `<div class="sx-toolbar"><div><h3>One data sweep. Two evaluation settings.</h3></div><div class="sx-play-controls"><button type="button" class="sx-play" aria-pressed="false">▶ Play data tour</button></div></div>
     <div class="sx-display-controls"><div class="sx-metric-toggles" role="group" aria-label="Results shown in both scaling charts">${metrics.map(metric => `<button type="button" class="sx-metric-toggle sx-${metric.key}" data-sx-metric="${metric.key}" aria-pressed="${visibleMetrics.has(metric.key)}"><span aria-hidden="true">${metric.marker}</span> ${metric.label}</button>`).join('')}</div></div>
     <div class="sx-layout">${panels.map(panel => `<article class="sx-panel" data-sx-panel="${panel.key}"><header><h4>${panel.title}</h4><p>${panel.subtitle}</p></header><div class="sx-chart-mount"></div><div class="sx-scale-caption"></div><div class="sx-values"></div><p class="sx-chart-note"></p></article>`).join('')}</div>
-    <details class="research-details"><summary>Evaluation details</summary><p>Each point is an independently trained checkpoint. Matched post-training uses a separate recipe from the 88.65% benchmark result. Post-training labels round the first three robot budgets to 2,000 / 4,200 / 8,000 h.</p></details>
     <span class="sx-sr-only" aria-live="polite" data-sx-announcement></span>`;
   const playButton = host.querySelector('.sx-play');
   function render(announce = false) {

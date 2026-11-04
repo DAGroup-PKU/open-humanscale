@@ -5,11 +5,42 @@
   if (!opening || !film) return;
   const root = document.documentElement;
   const sound = document.querySelector('.film-sound');
+  const start = document.querySelector('.film-start');
+  const seek = document.querySelector('.film-seek');
+  const time = document.querySelector('.film-time');
   const stage = opening.querySelector('.film-stage');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let canPlay = false;
   let resumeOnReturn = !motion.matches;
   let scheduled = false;
+  film.muted = false;
+  function playFilm() {
+    film.play().then(() => { start.hidden = true; }).catch(() => { start.hidden = false; });
+  }
+  start.addEventListener('click', playFilm);
+  const clock = value => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
+  let scrubbing = false;
+  function updateTimeline() {
+    if (!Number.isFinite(film.duration)) return;
+    seek.disabled = false;
+    seek.max = film.duration;
+    if (!scrubbing) seek.value = film.currentTime;
+    const position = Number(seek.value);
+    time.textContent = `${clock(position)} / ${clock(film.duration)}`;
+    seek.setAttribute('aria-valuetext', `${clock(position)} of ${clock(film.duration)}`);
+    seek.style.setProperty('--seek-progress', `${position / film.duration * 100}%`);
+  }
+  seek.addEventListener('pointerdown', () => { scrubbing = true; });
+  seek.addEventListener('input', () => {
+    film.currentTime = Number(seek.value);
+    updateTimeline();
+  });
+  const finishSeek = () => { scrubbing = false; updateTimeline(); };
+  seek.addEventListener('change', finishSeek);
+  seek.addEventListener('pointercancel', finishSeek);
+  addEventListener('pointerup', finishSeek);
+  ['loadedmetadata', 'durationchange', 'timeupdate', 'seeked'].forEach(event => film.addEventListener(event, updateTimeline));
+  updateTimeline();
   const smooth = (a, b, value) => {
     const x = Math.max(0, Math.min(1, (value - a) / (b - a)));
     return x * x * (3 - 2 * x);
@@ -41,7 +72,7 @@
         film.pause();
       } else {
         canPlay = true;
-        if (resumeOnReturn && !motion.matches) film.play().catch(() => {});
+        if (resumeOnReturn && !motion.matches) playFilm();
       }
     }
   }
@@ -49,11 +80,12 @@
     if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
   }
   film.addEventListener('pause', () => { if (canPlay) resumeOnReturn = false; });
-  film.addEventListener('play', () => { resumeOnReturn = true; });
+  film.addEventListener('play', () => { resumeOnReturn = true; start.hidden = true; });
   const updateSound = () => {
     sound.innerHTML = `Sound ${film.muted ? 'off' : 'on'} <span aria-hidden="true">${film.muted ? '↗' : '✓'}</span>`;
     sound.setAttribute('aria-pressed', String(!film.muted));
     sound.setAttribute('aria-label', `Turn film sound ${film.muted ? 'on' : 'off'}`);
+    start.textContent = film.muted ? '▶ Play film' : '▶ Play film with sound';
   };
   sound.addEventListener('click', () => { film.muted = !film.muted; updateSound(); });
   film.addEventListener('volumechange', updateSound);
@@ -63,7 +95,7 @@
   document.addEventListener('visibilitychange', update);
   document.querySelectorAll('a[href="#project-film"]').forEach(link => link.addEventListener('click', () => {
     resumeOnReturn = true;
-    if (canPlay) film.play().catch(() => {});
+    if (canPlay) playFilm();
   }));
   document.body.classList.add('film-enhanced');
   updateSound();

@@ -274,6 +274,14 @@ body .task-dialog .video-wrap > video {
   object-fit: contain;
 }
 body .task-dialog .camera-note { margin: 14px 0 0; font-size: 12px; line-height: 1.65; }
+body .zero-task-demonstration { margin-top: 20px; }
+body .zero-task-demonstration.has-goal { display: grid; grid-template-columns: minmax(180px, .34fr) minmax(0, 1fr); align-items: start; gap: 24px; }
+body .zero-task-goal { margin: 0; min-width: 0; }
+body .zero-task-goal figcaption { margin: 0 0 10px; color: var(--blue); font-size: 13px; font-weight: 600; text-align: left; }
+body .zero-task-goal .figure-button { position: relative; display: block; width: 100%; border-radius: 8px; overflow: hidden; }
+body .zero-task-goal img { display: block; width: 100%; height: auto; }
+body .zero-task-goal .figure-button > span { position: absolute; bottom: 7px; right: 7px; color: #fff; background: #142132c9; border-radius: 50%; padding: 2px 7px; }
+body .zero-task-demonstration .zero-camera-pair.single-camera { width: 100%; }
 
 @media (max-width: 1000px) {
   body #zero-gallery.zero-task-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -282,6 +290,8 @@ body .task-dialog .camera-note { margin: 14px 0 0; font-size: 12px; line-height:
   body #zero-gallery-summary { flex-basis: 250px; }
 }
 @media (max-width: 700px) {
+  body .zero-task-demonstration.has-goal { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  body .zero-task-goal { width: 58%; max-width: 280px; }
   body .task-dialog-shell { padding: 20px; }
   body .task-dialog-header { gap: 14px; min-height: 0; }
   body .task-dialog-header h3 { font-size: 23px; }

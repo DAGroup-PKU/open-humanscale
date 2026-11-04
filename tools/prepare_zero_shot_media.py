@@ -150,6 +150,15 @@ def main():
         (root / folder).mkdir(parents=True, exist_ok=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
         entries = list(pool.map(lambda spec: prepare(spec, source, root), CLIPS))
+    manifest_path = root / "assets/zero-shot-gallery.json"
+    if manifest_path.exists():
+        previous = json.loads(manifest_path.read_text())['clips']
+        goals = {clip['id']: clip['goal'] for clip in previous if 'goal' in clip}
+        generated_ids = {entry['id'] for entry in entries}
+        entries.extend(clip for clip in previous if clip['id'] not in generated_ids)
+        for entry in entries:
+            if entry['id'] in goals:
+                entry['goal'] = goals[entry['id']]
     manifest = {
         "revision": 1,
         "description": "Twenty complete supplied processed zero-shot recordings. Camera viewpoint and source timing preserved; audio omitted for muted web playback.",

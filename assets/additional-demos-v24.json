@@ -1,0 +1,16 @@
+[
+  {
+    "id": "long-household-third-v24",
+    "source": "videos/长程任务/飞书20261104-175943.mp4",
+    "src": "assets/videos/presentation/long-household-third-v24.mp4",
+    "sha256": "fec8cec623de3975f4dc5bfeb5229e25fd17284bf949afabe241616ae96aa0e9",
+    "encoding": "Original file copied byte-for-byte."
+  },
+  {
+    "id": "long-household-ego-v24",
+    "source": "videos/长程任务/飞书20261104-175938.mp4",
+    "src": "assets/videos/presentation/long-household-ego-v24.mp4",
+    "sha256": "dec58b1883bf42b91baa31c462a89070051f5fb6ad8167a65f7338b65d9981ec",
+    "encoding": "Original file copied byte-for-byte."
+  }
+]

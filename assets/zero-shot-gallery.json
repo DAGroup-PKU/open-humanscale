@@ -1,6 +1,6 @@
 {
-  "revision": 1,
-  "description": "Twenty complete supplied processed zero-shot recordings. Camera viewpoint and source timing preserved; audio omitted for muted web playback.",
+  "revision": 3,
+  "description": "Twenty-one supplied zero-shot recordings; verified input goals are shown where available.",
   "clips": [
     {
       "id": "zero-water-bottles",
@@ -22,7 +22,22 @@
       "frame_count": 360,
       "poster_time": 9.0,
       "size_bytes": 429533,
-      "legacy_id": "zero-bottles"
+      "legacy_id": "zero-bottles",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-water-bottles.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/左右手各拿一瓶水/拿两瓶水.mp4",
+        "source_sha256": "d303743eb113815ad26ff367cba4ae197292d9999d6df9916651fc2b2412f794",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-mug-handle",
@@ -44,7 +59,22 @@
       "frame_count": 291,
       "poster_time": 6.984,
       "size_bytes": 376365,
-      "legacy_id": "zero-mug"
+      "legacy_id": "zero-mug",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-mug-handle.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/杯子放在杯垫上——夹杯把儿版/拿杯子-1.mp4",
+        "source_sha256": "f6710307f29260b4b4ffacfe7e217fc5496d82e55b728412eb8e8868a0b50057",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-block-stack",
@@ -171,7 +201,22 @@
       "frame_count": 303,
       "poster_time": 6.767,
       "size_bytes": 407129,
-      "legacy_id": "zero-sort"
+      "legacy_id": "zero-sort",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-egg-ball-sort.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/鸡蛋和球分别放左右碗/鸡蛋和球分别放左右碗-第一视角.mp4",
+        "source_sha256": "e0b0d20effe4c32c4c61a9c591c26b5b888fb11bb95437ace6fafbeb2bc8df66",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-screwdriver-drawer",
@@ -192,7 +237,22 @@
       "frame_rate": "30/1",
       "frame_count": 1667,
       "poster_time": 36.118,
-      "size_bytes": 1359380
+      "size_bytes": 1359380,
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-screwdriver-drawer.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/抽屉放螺丝刀——后续出现推抽屉的动作/抽屉放螺丝刀-1.mp4",
+        "source_sha256": "ea9207fea26dc85775f46b4920c319ffad21bd2730536d63cd729142563f6b31",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-mug-body",
@@ -213,7 +273,22 @@
       "frame_rate": "30/1",
       "frame_count": 359,
       "poster_time": 8.616,
-      "size_bytes": 409521
+      "size_bytes": 409521,
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-mug-body.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/杯子放在杯垫上——夹瓶身版/拿杯子-2-1.mp4",
+        "source_sha256": "0c6e48ef94134564ea8d632899b49826ac1f32d799d4e6633d4daef4f9a2edb3",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-book-storage",
@@ -234,7 +309,22 @@
       "frame_rate": "30/1",
       "frame_count": 634,
       "poster_time": 13.736,
-      "size_bytes": 569156
+      "size_bytes": 569156,
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-book-storage.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/书本收纳/移动书.mp4",
+        "source_sha256": "0e116e23590a22d69e0da3706646ea9687637b28d28df891ae37254921c6ba23",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-two-drinks-2",
@@ -277,7 +367,22 @@
       "frame_count": 531,
       "poster_time": 12.39,
       "size_bytes": 651359,
-      "legacy_id": "zero-glue"
+      "legacy_id": "zero-glue",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-glue-placement.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/胶棒放到笔筒里 ——根据goal image有笔筒位置调整/胶棒放到笔筒_.mp4",
+        "source_sha256": "65483e27a3a6f9e3129d23209531dc255d3281f32e98686e9c734b5314e27962",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-block-lineup",
@@ -320,7 +425,22 @@
       "frame_count": 1256,
       "poster_time": 20.933,
       "size_bytes": 1394739,
-      "legacy_id": "zero-handover"
+      "legacy_id": "zero-handover",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-object-handover.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/排序——出现“换手”的双手协作/排序换手-1.mp4",
+        "source_sha256": "90aed3002635876e139aa30101dc58890169dbb1556426917604afb4edad7e02",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-block-on-books",
@@ -342,7 +462,22 @@
       "frame_count": 259,
       "poster_time": 6.043,
       "size_bytes": 361684,
-      "legacy_id": "zero-stack"
+      "legacy_id": "zero-stack",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-block-on-books.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/方块放到书堆上/方块放到书堆上.mp4",
+        "source_sha256": "fdaabdbb111c7d00c9d2cc438e018e934c9ce2ea1a61601a7bc932f6a85ce997",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-bowl-push",
@@ -405,7 +540,22 @@
       "frame_rate": "30/1",
       "frame_count": 310,
       "poster_time": 5.167,
-      "size_bytes": 396507
+      "size_bytes": 396507,
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-positioning-a.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/定位/10月31日 (5)(1).mp4",
+        "source_sha256": "9aa0d30567af572d07b9d7978aa0f031c4051d9c45bc4e2823edd276dfae274d",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     },
     {
       "id": "zero-positioning-b",
@@ -427,7 +577,60 @@
       "frame_count": 244,
       "poster_time": 4.067,
       "size_bytes": 315372,
-      "note": "Positioning example; the complete supplied clip includes the bottle tipping after release."
+      "note": "Positioning example; the complete supplied clip includes the bottle tipping after release.",
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-positioning-b.webp",
+        "width": 632,
+        "height": 304,
+        "source": "videos/zero-shot/定位2/10月31日 (5).mp4",
+        "source_sha256": "6c2a2f0ccc8a85b27a533f6d0f1d0959fe7c49601fb7c81005668780584929ef",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
+    },
+    {
+      "id": "zero-human-handover",
+      "title": "Bottle handover to a person",
+      "category": "coordination",
+      "src": "assets/videos/zero-shot/zero-human-handover.mp4",
+      "poster": "assets/posters/zero-shot/zero-human-handover.jpg",
+      "source_name": "飞书20261104-175922.mp4",
+      "source_path": "videos/飞书20261104-175922.mp4",
+      "source_sha256": "d6e93a4d5177ae8edd3e61abbf40235e89540505efaa650f4b8a291fce93bb8f",
+      "output_sha256": "9657999c589cc0415aa5680f16e0ed7d852d9bed7d5f2ff254e1e7b8c499585f",
+      "camera_view": "robot",
+      "dimensions": [
+        640,
+        360
+      ],
+      "duration": 21.618005,
+      "size_bytes": 1983212,
+      "crop_xywh": [
+        640,
+        0,
+        640,
+        360
+      ],
+      "goal": {
+        "src": "assets/goals/zero-shot/zero-human-handover.jpg",
+        "width": 632,
+        "height": 304,
+        "source": "videos/飞书20261104-175922.mp4",
+        "time_seconds": 1,
+        "crop_xywh": [
+          4,
+          30,
+          632,
+          304
+        ],
+        "provenance": "Fixed input-goal pane in the original interface recording."
+      }
     }
   ]
 }
