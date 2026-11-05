@@ -31,7 +31,7 @@ The current checkout publishes the `page` branch to the `dagroup` remote (`DAGro
 
 ## Current media
 
-The opening film is `Open-HumanScale_v5.mp4`, copied byte-for-byte at 1920×1080 with no transcoding. Its hash, size and duration are recorded in `assets/project-film.json`. Sound is enabled by default; viewers can mute it. Browsers that block audible autoplay show a play button. The shared custom timeline supports dragging and keyboard seeking.
+The opening film is `Open-HumanWAM_v5.mp4`, copied byte-for-byte at 1920×1080 with no transcoding. Its hash, size and duration are recorded in `assets/project-film.json`. Sound is enabled by default; viewers can mute it. Browsers that block audible autoplay show a play button. The shared custom timeline supports dragging and keyboard seeking.
 
 The HumanWAM-Goal architecture was refreshed from the November 5 `GoalWAM_arch.pdf` as a 3200-pixel-wide lossless WebP. Its source and output hashes are recorded in `assets/figures/paper-current-manifest.json`.
 
