@@ -2,7 +2,7 @@
 
 Static project website for Open-HumanScale, including its images, fonts, and demo videos.
 
-Test website: https://jiankai-ss.github.io/open-humanscale/
+Test website: https://dagroup-pku.github.io/open-humanscale/
 
 ## Local preview
 
