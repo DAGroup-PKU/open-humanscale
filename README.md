@@ -1,4 +1,4 @@
-# Open-HumanScale project page
+# Open-HumanWAM project page
 
 Static website: https://dagroup-pku.github.io/open-humanscale/
 

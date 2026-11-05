@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Open-HumanScale: An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Model</title>
-<meta name="description" content="Open-HumanScale presents a 50k-hour egocentric corpus, systematic scaling studies, HumanWAM-Vanilla, and HumanWAM-Goal for embodied foundation model research.">
-<meta property="og:title" content="Open-HumanScale: An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Model"><meta property="og:description" content="A 50k-hour egocentric corpus, pure human and hybrid human–robot scaling, and visual-goal-conditioned robot execution."><meta property="og:type" content="website"><meta property="og:url" content="https://dagroup-pku.github.io/open-humanscale/"><meta property="og:image" content="https://dagroup-pku.github.io/open-humanscale/assets/posters/presentation/Open-HumanScale_v5.jpg">
+<title>Open-HumanWAM: An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Models</title>
+<meta name="description" content="Open-HumanWAM presents a 50k-hour egocentric corpus, systematic scaling studies, HumanWAM-Vanilla, and HumanWAM-Goal for embodied foundation model research.">
+<meta property="og:title" content="Open-HumanWAM: An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Models"><meta property="og:description" content="A 50k-hour egocentric corpus, pure human and hybrid human–robot scaling, and visual-goal-conditioned robot execution."><meta property="og:type" content="website"><meta property="og:url" content="https://dagroup-pku.github.io/open-humanscale/"><meta property="og:image" content="https://dagroup-pku.github.io/open-humanscale/assets/posters/presentation/Open-HumanScale_v5.jpg">
 <meta name="theme-color" content="#f6f8fa"><link rel="canonical" href="https://dagroup-pku.github.io/open-humanscale/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=15"><link rel="stylesheet" href="scaling-explorer.css?v=21"><script src="goal-annotations.js?v=24" defer></script><script src="paired-video.js?v=25" defer></script><script src="app.js?v=25" defer></script><script src="video-seek.js?v=16" defer></script><script src="scaling-explorer.js?v=24" defer></script><link rel="stylesheet" href="action-space-v8.css?v=20"><script src="action-space-v8.js?v=20" defer></script>
 <link rel="stylesheet" href="benchmark-motion.css?v=20"><script src="benchmark-data-v20.js" defer></script><script src="benchmark-motion.js?v=20" defer></script>
@@ -18,11 +18,11 @@
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
-<header class="site-header"><div class="nav-wrap"><a class="wordmark" href="#overview">Open-<span>Human</span>Scale</a><nav id="main-nav" aria-label="Main navigation"><a href="#project-film" class="nav-film">Film</a><a href="#scaling">Ego scaling</a><a href="#method">Hybrid scaling</a><a href="#robotwin">Benchmarks</a><a href="#zero-shot">Zero-shot</a><a href="#visual-goals">Goal ICL</a><a href="#human-goals">Human goals</a><a href="#long-horizon">Long horizon</a></nav><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">Menu <span>+</span></button></div></header>
+<header class="site-header"><div class="nav-wrap"><a class="wordmark" href="#overview">Open-<span>Human</span>WAM</a><nav id="main-nav" aria-label="Main navigation"><a href="#project-film" class="nav-film">Film</a><a href="#scaling">Ego scaling</a><a href="#method">Hybrid scaling</a><a href="#robotwin">Benchmarks</a><a href="#zero-shot">Zero-shot</a><a href="#visual-goals">Goal ICL</a><a href="#human-goals">Human goals</a><a href="#long-horizon">Long horizon</a></nav><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">Menu <span>+</span></button></div></header>
 <main>
 <section class="film-opening" id="project-film" aria-label="Project film">
 <div class="film-stage"><div class="film-content"><div class="film-player">
-<video id="hero-video" controls playsinline loop preload="metadata" poster="assets/posters/presentation/Open-HumanScale_v5.jpg" aria-label="Open-HumanScale project film"><source src="assets/videos/presentation/Open-HumanScale_v5.mp4" type="video/mp4">Your browser does not support video.</video>
+<video id="hero-video" controls playsinline loop preload="metadata" poster="assets/posters/presentation/Open-HumanScale_v5.jpg" aria-label="Open-HumanWAM project film"><source src="assets/videos/presentation/Open-HumanScale_v5.mp4" type="video/mp4">Your browser does not support video.</video>
 <button class="film-start" type="button" hidden>▶ Play film with sound</button></div>
 <div class="film-scrubber"><input class="film-seek" type="range" min="0" max="236.067" step="0.1" value="0" aria-label="Film playback position" disabled><output class="film-time">0:00 / 3:56</output></div>
 <div class="film-meta"><span>Project film <span class="film-duration">3:56</span></span><a class="film-explore" href="#overview">Explore the research <span aria-hidden="true">↓</span></a><button type="button" class="film-sound" aria-label="Turn film sound off" aria-pressed="true">Sound on <span aria-hidden="true">↗</span></button></div>
@@ -30,9 +30,9 @@
 </section>
 <section class="hero" id="overview"><div class="wrap">
 
-<h1><span class="project-name">Open-<span>Human</span>Scale:</span> <span class="paper-subtitle">An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Model</span></h1>
+<h1><span class="project-name">Open-<span>Human</span>WAM:</span> <span class="paper-subtitle">An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Models</span></h1>
 <div class="paper-info" aria-label="Authors and affiliations">
-<div class="authors"><span class="author-name">Juncheng Ma<sup>*</sup>,</span> <span class="author-name">Jiaxin Li<sup>*</sup>,</span> <span class="author-name">Jiankai Tu<sup>*</sup>,</span> <span class="author-name">Bo Liang<sup>*</sup>,</span> <span class="author-name">Guodong Lv,</span> <span class="author-name">Yufan Deng,</span> <span class="author-name">Junzhe Tang,</span> <span class="author-name">Liangzhu Yang,</span> <span class="author-name">Chen Bian,</span> <span class="author-name">Zicong Cao,</span> <span class="author-name">Baohao Zhu,</span> <span class="author-name">Jianxin Bi,</span> <span class="author-name">Tengfei Yan,</span> <span class="author-name">Yinyuan Zhang,</span> <span class="author-name">Kewei Zhang,</span> <span class="author-name">Xinglong Chen,</span> <span class="author-name">Kaiqi Chen,</span> <span class="author-name">Duomin Wang,</span> <span class="author-name">Xiaotian Tang,</span> <span class="author-name">Li Li,</span> <span class="author-name">Yuan Xu,</span> <span class="author-name">Haosen Yang,</span> <span class="author-name">Yuqi Wang,</span> <span class="author-name">Jingfei Xia,</span> <span class="author-name">Eric Huang,</span> <span class="author-name">Zhiyang Dou,</span> <span class="author-name">Zhen Dong,</span> <span class="author-name">Enze Xie,</span> <span class="author-name">Tat-Seng Chua,</span> <span class="author-name">Daquan Zhou<sup>†</sup></span></div>
+<div class="authors"><span class="author-name">Juncheng Ma<sup>*</sup>,</span> <span class="author-name">Jiaxin Li<sup>*</sup>,</span> <span class="author-name">Jiankai Tu<sup>*</sup>,</span> <span class="author-name">Bo Liang<sup>*</sup>,</span> <span class="author-name">Guodong Lv,</span> <span class="author-name">Yufan Deng,</span> <span class="author-name">Junzhe Tang,</span> <span class="author-name">Liangzhu Yang,</span> <span class="author-name">Chen Bian,</span> <span class="author-name">Shukai Gong,</span> <span class="author-name">Yintianrun Zhang,</span> <span class="author-name">Zicong Cao,</span> <span class="author-name">Baohao Zhu,</span> <span class="author-name">Jianxin Bi,</span> <span class="author-name">Tengfei Yan,</span> <span class="author-name">Yinyuan Zhang,</span> <span class="author-name">Kewei Zhang,</span> <span class="author-name">Xinglong Chen,</span> <span class="author-name">Kaiqi Chen,</span> <span class="author-name">Duomin Wang,</span> <span class="author-name">Xiaotian Tang,</span> <span class="author-name">Liang Tan,</span> <span class="author-name">Li Li,</span> <span class="author-name">Yuan Xu,</span> <span class="author-name">Haosen Yang,</span> <span class="author-name">Yuqi Wang,</span> <span class="author-name">Jingfei Xia,</span> <span class="author-name">Songyan Huang,</span> <span class="author-name">Zhiyang Dou,</span> <span class="author-name">Zhen Dong,</span> <span class="author-name">Enze Xie,</span> <span class="author-name">Wojciech Matusik,</span> <span class="author-name">Tat-Seng Chua,</span> <span class="author-name">Daquan Zhou<sup>†</sup></span></div>
 
 <p class="author-note">* Equal contribution &nbsp; · &nbsp; † Corresponding author</p>
 <div class="institution-logos" aria-label="Institution logos">
@@ -136,26 +136,27 @@
 
 
 <section class="bonus-section" id="human-follow"><div class="wrap"><div class="bonus-heading"><div><span class="eyebrow">And, before you go…</span><h2>One more thing.</h2></div><div><h3 class="bonus-subtitle">A human demonstrates. The robot follows.</h3><p class="bonus-description">A person demonstrates an interaction; the robot then follows in the same continuous recording. The policy remains in inference throughout, with no mode switch between demonstration and execution.</p></div></div><div class="bonus-playback"><span>Continuous recordings · automatic loops</span><button id="bonus-motion" class="button secondary" aria-pressed="false">Pause animations</button></div><div class="bonus-pair media-play-group"><figure class="bonus-film"><video data-preview-loop controls muted loop playsinline preload="metadata" poster="assets/posters/presentation/human-follow-tea-continuous-v9.webp" aria-label="Human demonstration and robot response, example 1"><source src="assets/videos/presentation/human-follow-tea-continuous-v9.mp4" type="video/mp4"></video><figcaption><span>01 / Human demonstration → Robot response</span><span>Continuous take</span></figcaption></figure><figure class="bonus-film"><video data-preview-loop controls muted loop playsinline preload="metadata" poster="assets/posters/presentation/human-follow-object-continuous-v9.webp" aria-label="Human demonstration and robot response, example 2"><source src="assets/videos/presentation/human-follow-object-continuous-v9.mp4" type="video/mp4"></video><figcaption><span>02 / Human demonstration → Robot response</span><span>Continuous take</span></figcaption></figure></div></div></section>
-<section class="citation-section section wrap" id="citation"><div class="citation-intro"><div class="eyebrow">Explore the research</div><h2>Open-HumanScale</h2><p>Read the <a href="https://arxiv.org/abs/2611.06817" target="_blank" rel="noopener noreferrer">paper</a> and explore the <a href="https://github.com/DAGroup-PKU/HumanNet/tree/open-humanscale" target="_blank" rel="noopener noreferrer">code</a>. Model checkpoints and dataset links are coming soon.</p></div><details class="citation-details" open><summary>BibTeX <span>+</span></summary><div class="citation-box"><button id="copy-citation">Copy citation ⧉</button><pre id="bibtex">@misc{ma2026openhumanscale,
-  title = {Open-HumanScale: An Open Recipe for Scaling Human
-    and Robot Experience for Embodied Foundation Model},
+<section class="citation-section section wrap" id="citation"><div class="citation-intro"><div class="eyebrow">Explore the research</div><h2>Open-HumanWAM</h2><p>Read the <a href="https://arxiv.org/abs/2611.06817" target="_blank" rel="noopener noreferrer">paper</a> and explore the <a href="https://github.com/DAGroup-PKU/HumanNet/tree/open-humanscale" target="_blank" rel="noopener noreferrer">code</a>. Model checkpoints and dataset links are coming soon.</p></div><details class="citation-details" open><summary>BibTeX <span>+</span></summary><div class="citation-box"><button id="copy-citation">Copy citation ⧉</button><pre id="bibtex">@misc{ma2026openhumanwam,
+  title = {Open-HumanWAM: An Open Recipe for Scaling Human
+    and Robot Experience for Embodied Foundation Models},
   author = {Ma, Juncheng and Li, Jiaxin and Tu, Jiankai and
     Liang, Bo and Lv, Guodong and Deng, Yufan and
     Tang, Junzhe and Yang, Liangzhu and Bian, Chen and
-    Cao, Zicong and Zhu, Baohao and Bi, Jianxin and
-    Yan, Tengfei and Zhang, Yinyuan and Zhang, Kewei and
-    Chen, Xinglong and Chen, Kaiqi and Wang, Duomin and
-    Tang, Xiaotian and Li, Li and Xu, Yuan and
+    Gong, Shukai and Zhang, Yintianrun and Cao, Zicong and
+    Zhu, Baohao and Bi, Jianxin and Yan, Tengfei and
+    Zhang, Yinyuan and Zhang, Kewei and Chen, Xinglong and
+    Chen, Kaiqi and Wang, Duomin and Tang, Xiaotian and
+    Tan, Liang and Li, Li and Xu, Yuan and
     Yang, Haosen and Wang, Yuqi and Xia, Jingfei and
-    Huang, Eric and Dou, Zhiyang and Dong, Zhen and
-    Xie, Enze and Chua, Tat-Seng and
+    Huang, Songyan and Dou, Zhiyang and Dong, Zhen and
+    Xie, Enze and Matusik, Wojciech and Chua, Tat-Seng and
     Zhou, Daquan},
   year = {2026},
   eprint = {2611.06817},
   archivePrefix = {arXiv},
   url = {https://arxiv.org/abs/2611.06817}
 }</pre><p class="fine-print"><a href="https://arxiv.org/abs/2611.06817" target="_blank" rel="noopener noreferrer">arXiv:2611.06817</a> · 2026</p><span id="copy-status" class="sr-only" aria-live="polite"></span></div></details></section>
-</main><footer class="wrap"><a class="wordmark" href="#overview">Open-HumanScale</a><span>Human experience → Robot capability</span><a href="#overview">Back to top ↑</a></footer>
+</main><footer class="wrap"><a class="wordmark" href="#overview">Open-HumanWAM</a><span>Human experience → Robot capability</span><a href="#overview">Back to top ↑</a></footer>
 
 <dialog id="zero-task-dialog" class="task-dialog" aria-labelledby="task-dialog-title" aria-describedby="task-dialog-description"><div class="task-dialog-shell">
 <header class="task-dialog-header"><div><span class="case-label">Real robot · Pretrained checkpoint</span><h3 id="task-dialog-title"></h3><p id="task-dialog-description"></p></div><button class="task-dialog-close" type="button" aria-label="Close task video" autofocus>Close ×</button></header>
