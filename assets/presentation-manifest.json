@@ -1,6 +1,6 @@
 {
   "revision": 2,
-  "description": "Reviewed presentation excerpts; matched camera variants have equal duration and disclosed playback adjustment. Original recordings retained.",
+  "description": "Provenance of the presentation excerpts retained by the current website.",
   "clips": [
     {
       "id": "zero-bottles",
@@ -110,42 +110,6 @@
       "independent_view_restart": true,
       "synchronized_views": false,
       "notes": "Trim initial readiness; retain rearrangement and both hands. Source durations differ considerably; do not time-align. Views show corresponding setup/actions but exact same-trial identity cannot be established from metadata; use independent view restart and avoid a synchronization claim.",
-      "labels_outside_action": false,
-      "separator_duration_seconds": 0,
-      "omitted_wait_interval_seconds": null,
-      "segment_labels": [],
-      "audio": "muted derivative"
-    },
-    {
-      "id": "zero-handover-ego",
-      "revision": 1,
-      "view": "first-person",
-      "source": "videos/zero-shot/排序——出现“换手”的双手协作/排序换手-1.mp4",
-      "source_base": "paper",
-      "source_sha256": "90aed3002635876e139aa30101dc58890169dbb1556426917604afb4edad7e02",
-      "source_duration_seconds": 41.889002,
-      "source_intervals_seconds": [
-        [
-          2.5,
-          41.88
-        ]
-      ],
-      "source_crop": "crop=640:360:640:0",
-      "output": "assets/videos/presentation/zero-handover-ego.mp4",
-      "output_sha256": "151bb7cc1017fd34926f938e207974ccefe74675a87647bb7f31e6fa5709ef3a",
-      "poster": "assets/posters/presentation/zero-handover-ego.webp",
-      "output_duration_seconds": 39.36,
-      "dimensions": [
-        1280,
-        720
-      ],
-      "fps": "25/1",
-      "playback_speed_relative_to_source": 1,
-      "source_speed": "as recorded",
-      "full_source_recording_retained": true,
-      "independent_view_restart": true,
-      "synchronized_views": false,
-      "notes": "Remove initial waiting only. Later motion is a meaningful continuation, not idle. Do not cut at 30 s and imply completed reordering. Camera views are separate recordings; no synchronization claim.",
       "labels_outside_action": false,
       "separator_duration_seconds": 0,
       "omitted_wait_interval_seconds": null,
@@ -540,134 +504,6 @@
       "separator_duration_seconds": 0,
       "omitted_wait_interval_seconds": null,
       "segment_labels": [],
-      "audio": "muted derivative"
-    },
-    {
-      "id": "long-household",
-      "revision": 1,
-      "view": "third-person",
-      "source": "assets/videos/long-household.mp4",
-      "source_base": "dist",
-      "source_sha256": "1a1ac170a0872332e8725bc6dc6174028c40427bd0734c568e1297d11ea9882a",
-      "source_duration_seconds": 102.88,
-      "source_intervals_seconds": [
-        [
-          0,
-          102.88
-        ]
-      ],
-      "source_crop": null,
-      "output": "assets/videos/presentation/long-household.mp4",
-      "output_sha256": "1a1ac170a0872332e8725bc6dc6174028c40427bd0734c568e1297d11ea9882a",
-      "poster": "assets/posters/presentation/long-household.webp",
-      "output_duration_seconds": 102.88,
-      "dimensions": [
-        1280,
-        720
-      ],
-      "fps": "25/1",
-      "playback_speed_relative_to_source": 1,
-      "source_speed": "2x",
-      "full_source_recording_retained": true,
-      "independent_view_restart": true,
-      "synchronized_views": false,
-      "notes": "Keep full long-horizon trajectory and final overview. Intermediate locomotion is part of the task rather than dead time.",
-      "labels_outside_action": false,
-      "separator_duration_seconds": 0,
-      "omitted_wait_interval_seconds": null,
-      "segment_labels": [],
-      "audio": "muted derivative"
-    },
-    {
-      "id": "human-follow-tea",
-      "revision": 1,
-      "view": "first-person",
-      "source": "videos/人类演示意图模仿/his乌龙茶影响-1.mp4",
-      "source_base": "paper",
-      "source_sha256": "4ca8b122703a1c1a1261c637a31df48b1a9aee9d09d86a2b8b116217d234cd8e",
-      "source_duration_seconds": 20.34,
-      "source_intervals_seconds": [
-        [
-          2.5,
-          6.2
-        ],
-        [
-          10.8,
-          20.32
-        ]
-      ],
-      "source_crop": "crop=640:360:640:0",
-      "output": "assets/videos/presentation/human-follow-tea.mp4",
-      "output_sha256": "fc511e8552830bf6ec52af7b46e4520cd2dd6903f13be156f0ab6b6478903fb4",
-      "poster": "assets/posters/presentation/human-follow-tea.webp",
-      "output_duration_seconds": 13.84,
-      "dimensions": [
-        1280,
-        720
-      ],
-      "fps": "25/1",
-      "playback_speed_relative_to_source": 1,
-      "source_speed": "as recorded",
-      "full_source_recording_retained": true,
-      "independent_view_restart": true,
-      "synchronized_views": false,
-      "notes": "Keep demonstration and full robot response, remove the wait between them with an explicit editorial transition. The removed fixed goal inset is a presentation edit, not a claim about model conditioning.",
-      "labels_outside_action": true,
-      "separator_duration_seconds": 0.6,
-      "omitted_wait_interval_seconds": [
-        6.2,
-        10.8
-      ],
-      "segment_labels": [
-        "Human demonstration",
-        "Robot response"
-      ],
-      "audio": "muted derivative"
-    },
-    {
-      "id": "human-follow-object",
-      "revision": 1,
-      "view": "first-person",
-      "source": "videos/人类演示意图模仿/his真有影响吧-1.mp4",
-      "source_base": "paper",
-      "source_sha256": "7758fd3fb7e08e368fea0e063e6e9d09ad423865c58a6bbd7ede504d81dfea38",
-      "source_duration_seconds": 26.3,
-      "source_intervals_seconds": [
-        [
-          0.5,
-          4.0
-        ],
-        [
-          10.0,
-          25.0
-        ]
-      ],
-      "source_crop": "crop=640:360:640:0",
-      "output": "assets/videos/presentation/human-follow-object.mp4",
-      "output_sha256": "45466720b79d57f16c0cf9337c397b5e83d649e32e5b369ac30230eef5e28d01",
-      "poster": "assets/posters/presentation/human-follow-object.webp",
-      "output_duration_seconds": 19.12,
-      "dimensions": [
-        1280,
-        720
-      ],
-      "fps": "25/1",
-      "playback_speed_relative_to_source": 1,
-      "source_speed": "as recorded",
-      "full_source_recording_retained": true,
-      "independent_view_restart": true,
-      "synchronized_views": false,
-      "notes": "Keep short human demonstration and robot placement; remove middle wait and trailing head-camera reset. The removed fixed goal inset is a presentation edit, not a claim about model conditioning.",
-      "labels_outside_action": true,
-      "separator_duration_seconds": 0.6,
-      "omitted_wait_interval_seconds": [
-        4.0,
-        10.0
-      ],
-      "segment_labels": [
-        "Human demonstration",
-        "Robot response"
-      ],
       "audio": "muted derivative"
     }
   ]

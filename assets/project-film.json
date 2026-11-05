@@ -1,13 +1,13 @@
 {
-  "source_name": "Open-HumanScale_v4.mp4",
-  "src": "assets/videos/presentation/Open-HumanScale_v4.mp4",
-  "poster": "assets/posters/presentation/Open-HumanScale_v4.jpg",
+  "source_name": "Open-HumanScale_v5.mp4",
+  "src": "assets/videos/presentation/Open-HumanScale_v5.mp4",
+  "poster": "assets/posters/presentation/Open-HumanScale_v5.jpg",
   "dimensions": [
     1920,
     1080
   ],
   "duration_seconds": 236.067,
-  "size_bytes": 78361364,
-  "sha256": "de256b773b61a32ca2528f4755a16d228dc26a2ca5129870825b5119965744d6",
+  "size_bytes": 78361200,
+  "sha256": "2a84477a17396a27a4cc6014590abfea8ed3fb04bbc2a24039c3e5e30e4626f2",
   "encoding": "Original file copied byte-for-byte; no transcoding."
 }
