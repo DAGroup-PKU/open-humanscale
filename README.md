@@ -2,6 +2,11 @@
 
 Static website: https://dagroup-pku.github.io/open-humanscale/
 
+## Research resources
+
+- Paper: https://arxiv.org/abs/2611.06817
+- Code: https://github.com/DAGroup-PKU/HumanNet/tree/open-humanscale
+
 ## Preview and publish
 
 ```sh

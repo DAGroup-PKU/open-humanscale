@@ -45,13 +45,13 @@
 <!-- Replace each disabled resource button with an anchor when its URL is available. -->
 <div class="research-links" role="group" aria-label="Research resources" aria-describedby="research-links-status">
 <a class="research-link intro-link" href="#project-film"><span aria-hidden="true">↗</span> Project film</a>
-<button class="research-link" type="button" data-resource="paper" disabled aria-label="Paper — coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v15H6z" fill="currentColor"/><path d="M14 2v6h5M9 13h7m-7 3h7m-7 3h4" fill="none" stroke="#fff" stroke-width="1.6"/></svg><span>Paper</span></button>
+<a class="research-link" data-resource="paper" href="https://arxiv.org/abs/2611.06817" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v15H6z" fill="currentColor"/><path d="M14 2v6h5M9 13h7m-7 3h7m-7 3h4" fill="none" stroke="#fff" stroke-width="1.6"/></svg><span>Paper</span></a>
 <button class="research-link" type="button" data-resource="daily-paper" disabled aria-label="Daily Paper — coming soon"><span class="resource-emoji" aria-hidden="true">🤗</span><span>Daily Paper</span></button>
-<button class="research-link" type="button" data-resource="code" disabled aria-label="Code — coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .8a11.4 11.4 0 0 0-3.6 22.2c.57.1.78-.25.78-.55v-2.1c-3.17.69-3.84-1.35-3.84-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.7.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.25 3.32.96.1-.74.4-1.25.73-1.53-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.17-3.05-.12-.29-.51-1.44.11-3 0 0 .96-.31 3.13 1.17a10.9 10.9 0 0 1 5.7 0c2.17-1.48 3.12-1.17 3.12-1.17.63 1.56.24 2.71.12 3 .73.79 1.17 1.81 1.17 3.05 0 4.38-2.66 5.34-5.2 5.62.41.36.77 1.05.77 2.12v3.09c0 .3.21.66.79.55A11.4 11.4 0 0 0 12 .8Z"/></svg><span>Code</span></button>
+<a class="research-link" data-resource="code" href="https://github.com/DAGroup-PKU/HumanNet/tree/open-humanscale" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .8a11.4 11.4 0 0 0-3.6 22.2c.57.1.78-.25.78-.55v-2.1c-3.17.69-3.84-1.35-3.84-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.7.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.25 3.32.96.1-.74.4-1.25.73-1.53-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.17-3.05-.12-.29-.51-1.44.11-3 0 0 .96-.31 3.13 1.17a10.9 10.9 0 0 1 5.7 0c2.17-1.48 3.12-1.17 3.12-1.17.63 1.56.24 2.71.12 3 .73.79 1.17 1.81 1.17 3.05 0 4.38-2.66 5.34-5.2 5.62.41.36.77 1.05.77 2.12v3.09c0 .3.21.66.79.55A11.4 11.4 0 0 0 12 .8Z"/></svg><span>Code</span></a>
 <button class="research-link" type="button" data-resource="hugging-face" disabled aria-label="Hugging Face — coming soon"><span class="resource-emoji" aria-hidden="true">🤗</span><span>Hugging Face</span></button>
 <a class="research-link" href="#citation" data-citation-link><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 3h7v8c0 5-2 8-6 10l-2-3c3-1 4-3 4-5H3V3zm12 0h7v8c0 5-2 8-6 10l-2-3c3-1 4-3 4-5h-3V3z"/></svg><span>BibTeX</span></a>
 </div>
-<p class="research-links-status" id="research-links-status">Paper, Daily Paper, Code &amp; Hugging Face · Coming soon</p>
+<p class="research-links-status" id="research-links-status">Daily Paper &amp; Hugging Face · Coming soon</p>
 
 
 
@@ -136,7 +136,7 @@
 
 
 <section class="bonus-section" id="human-follow"><div class="wrap"><div class="bonus-heading"><div><span class="eyebrow">And, before you go…</span><h2>One more thing.</h2></div><div><h3 class="bonus-subtitle">A human demonstrates. The robot follows.</h3><p class="bonus-description">A person demonstrates an interaction; the robot then follows in the same continuous recording. The policy remains in inference throughout, with no mode switch between demonstration and execution.</p></div></div><div class="bonus-playback"><span>Continuous recordings · automatic loops</span><button id="bonus-motion" class="button secondary" aria-pressed="false">Pause animations</button></div><div class="bonus-pair media-play-group"><figure class="bonus-film"><video data-preview-loop controls muted loop playsinline preload="metadata" poster="assets/posters/presentation/human-follow-tea-continuous-v9.webp" aria-label="Human demonstration and robot response, example 1"><source src="assets/videos/presentation/human-follow-tea-continuous-v9.mp4" type="video/mp4"></video><figcaption><span>01 / Human demonstration → Robot response</span><span>Continuous take</span></figcaption></figure><figure class="bonus-film"><video data-preview-loop controls muted loop playsinline preload="metadata" poster="assets/posters/presentation/human-follow-object-continuous-v9.webp" aria-label="Human demonstration and robot response, example 2"><source src="assets/videos/presentation/human-follow-object-continuous-v9.mp4" type="video/mp4"></video><figcaption><span>02 / Human demonstration → Robot response</span><span>Continuous take</span></figcaption></figure></div></div></section>
-<section class="citation-section section wrap" id="citation"><div class="citation-intro"><div class="eyebrow">Explore the research</div><h2>Open-HumanScale</h2><p>Paper, code, model checkpoints, and dataset links are coming soon.</p></div><details class="citation-details" open><summary>BibTeX <span>+</span></summary><div class="citation-box"><button id="copy-citation">Copy citation ⧉</button><pre id="bibtex">@unpublished{ma2026openhumanscale,
+<section class="citation-section section wrap" id="citation"><div class="citation-intro"><div class="eyebrow">Explore the research</div><h2>Open-HumanScale</h2><p>Read the <a href="https://arxiv.org/abs/2611.06817" target="_blank" rel="noopener noreferrer">paper</a> and explore the <a href="https://github.com/DAGroup-PKU/HumanNet/tree/open-humanscale" target="_blank" rel="noopener noreferrer">code</a>. Model checkpoints and dataset links are coming soon.</p></div><details class="citation-details" open><summary>BibTeX <span>+</span></summary><div class="citation-box"><button id="copy-citation">Copy citation ⧉</button><pre id="bibtex">@misc{ma2026openhumanscale,
   title = {Open-HumanScale: An Open Recipe for Scaling Human
     and Robot Experience for Embodied Foundation Model},
   author = {Ma, Juncheng and Li, Jiaxin and Tu, Jiankai and
@@ -151,8 +151,10 @@
     Xie, Enze and Chua, Tat-Seng and
     Zhou, Daquan},
   year = {2026},
-  note = {Manuscript}
-}</pre><p class="fine-print">Citation follows the current manuscript. The publication link will be added when available.</p><span id="copy-status" class="sr-only" aria-live="polite"></span></div></details></section>
+  eprint = {2611.06817},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2611.06817}
+}</pre><p class="fine-print"><a href="https://arxiv.org/abs/2611.06817" target="_blank" rel="noopener noreferrer">arXiv:2611.06817</a> · 2026</p><span id="copy-status" class="sr-only" aria-live="polite"></span></div></details></section>
 </main><footer class="wrap"><a class="wordmark" href="#overview">Open-HumanScale</a><span>Human experience → Robot capability</span><a href="#overview">Back to top ↑</a></footer>
 
 <dialog id="zero-task-dialog" class="task-dialog" aria-labelledby="task-dialog-title" aria-describedby="task-dialog-description"><div class="task-dialog-shell">
