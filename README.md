@@ -5,7 +5,9 @@ Static website: https://dagroup-pku.github.io/open-humanscale/
 ## Research resources
 
 - Paper: https://arxiv.org/abs/2611.06817
-- Code: https://github.com/DAGroup-PKU/HumanNet/tree/open-humanscale
+- Code: https://github.com/DAGroup-PKU/HumanNet/tree/Open-HumanWAM
+- Hugging Face Models: https://huggingface.co/collections/DAGroup-PKU/open-humanwam
+- Hugging Face Datasets: https://huggingface.co/datasets/DAGroup-PKU/Open-HumanWAM-50K
 
 ## Preview and publish
 
